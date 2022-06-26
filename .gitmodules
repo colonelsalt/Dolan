@@ -1,0 +1,3 @@
+[submodule "Dolan/vendor/spdlog"]
+	path = Dolan/vendor/spdlog
+	url = https://github.com/gabime/spdlog
