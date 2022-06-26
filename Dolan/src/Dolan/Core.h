@@ -9,3 +9,5 @@
 #else
 	#error Dolan only supports Windows!
 #endif // DN_PLATFORM_WINDOWS
+
+#define BIT(x) (1 << x)

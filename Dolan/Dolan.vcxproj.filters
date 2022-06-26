@@ -4,6 +4,9 @@
     <Filter Include="Dolan">
       <UniqueIdentifier>{D3380C0D-3F4D-34BE-08CF-D71D74A230EF}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Dolan\Events">
+      <UniqueIdentifier>{5759D553-43BC-64F8-EC41-9DAED883307B}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Dolan.h" />
@@ -15,6 +18,18 @@
     </ClInclude>
     <ClInclude Include="src\Dolan\EntryPoint.h">
       <Filter>Dolan</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Dolan\Events\ApplicationEvent.h">
+      <Filter>Dolan\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Dolan\Events\Event.h">
+      <Filter>Dolan\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Dolan\Events\KeyEvent.h">
+      <Filter>Dolan\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Dolan\Events\MouseEvent.h">
+      <Filter>Dolan\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\Dolan\Log.h">
       <Filter>Dolan</Filter>
