@@ -39,6 +39,7 @@ namespace Dolan {
 
 	class DOLAN_API KeyReleasedEvent : public KeyEvent
 	{
+	public:
 		KeyReleasedEvent(int keyCode)
 			: KeyEvent(keyCode) {}
 
