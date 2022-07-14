@@ -1,9 +1,7 @@
 #pragma once
 
+#include "dnpch.h"
 #include "Dolan/Core.h"
-
-#include <string>
-#include <functional>
 
 namespace Dolan {
 

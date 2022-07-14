@@ -2,8 +2,6 @@
 
 #include "Event.h"
 
-#include <sstream>
-
 namespace Dolan {
 
 	class DOLAN_API WindowResizeEvent : public Event

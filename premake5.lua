@@ -10,6 +10,11 @@ workspace "Dolan"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+IncludeDir = {}
+IncludeDir["GLFW"] = "Dolan/vendor/GLFW/include"
+
+include "Dolan/vendor/GLFW"
+
 project "Dolan"
 	location "Dolan"
 	kind "SharedLib"
@@ -17,6 +22,9 @@ project "Dolan"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+	pchheader "dnpch.h"
+	pchsource "Dolan/src/dnpch.cpp"
 
 	files
 	{
@@ -27,7 +35,14 @@ project "Dolan"
 	includedirs
 	{
 		"%{prj.name}/src",
-		"%{prj.name}/vendor/spdlog/include"
+		"%{prj.name}/vendor/spdlog/include",
+		"%{IncludeDir.GLFW}"
+	}
+
+	links
+	{
+		"GLFW",
+		"opengl32.lib"
 	}
 
 	filter "system:windows"
@@ -49,6 +64,8 @@ project "Dolan"
 	filter "configurations:Debug"
 		defines "DN_DEBUG"
 		symbols "On"
+		staticruntime "Off"
+		runtime "Debug"
 
 	filter "configurations:Release"
 		defines "DN_RELEASE"
