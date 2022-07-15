@@ -37,6 +37,12 @@
     <ClInclude Include="src\Dolan\Events\MouseEvent.h">
       <Filter>Dolan\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\Dolan\Layer.h">
+      <Filter>Dolan</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Dolan\LayerStack.h">
+      <Filter>Dolan</Filter>
+    </ClInclude>
     <ClInclude Include="src\Dolan\Log.h">
       <Filter>Dolan</Filter>
     </ClInclude>
@@ -50,6 +56,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Dolan\Application.cpp">
+      <Filter>Dolan</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Dolan\Layer.cpp">
+      <Filter>Dolan</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Dolan\LayerStack.cpp">
       <Filter>Dolan</Filter>
     </ClCompile>
     <ClCompile Include="src\Dolan\Log.cpp">
