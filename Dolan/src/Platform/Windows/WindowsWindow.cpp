@@ -5,6 +5,8 @@
 #include "Dolan/Events/KeyEvent.h"
 #include "Dolan/Events/MouseEvent.h"
 
+#include <glad/glad.h>
+
 namespace Dolan {
 
 	static bool s_GlfwInitialised = false;
@@ -47,6 +49,10 @@ namespace Dolan {
 
 		m_Window = glfwCreateWindow((int)m_Data.Width, (int)m_Data.Height, m_Data.Title.c_str(), nullptr, nullptr);
 		glfwMakeContextCurrent(m_Window);
+
+		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		DN_CORE_ASSERT(status, "Failed to initialise Glad");
+
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
 

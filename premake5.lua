@@ -12,8 +12,10 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 IncludeDir = {}
 IncludeDir["GLFW"] = "Dolan/vendor/GLFW/include"
+IncludeDir["Glad"] = "Dolan/vendor/Glad/include"
 
 include "Dolan/vendor/GLFW"
+include "Dolan/vendor/Glad"
 
 project "Dolan"
 	location "Dolan"
@@ -36,12 +38,14 @@ project "Dolan"
 	{
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
-		"%{IncludeDir.GLFW}"
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.Glad}"
 	}
 
 	links
 	{
 		"GLFW",
+		"Glad",
 		"opengl32.lib"
 	}
 
@@ -53,7 +57,8 @@ project "Dolan"
 		defines
 		{
 			"DN_PLATFORM_WINDOWS",
-			"DN_BUILD_DLL"
+			"DN_BUILD_DLL",
+			"GLFW_INCLUDE_NONE"
 		}
 
 		postbuildcommands

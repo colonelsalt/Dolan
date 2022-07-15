@@ -3,7 +3,7 @@
 
 #include "Dolan/Log.h"
 
-#include "GLFW/glfw3.h"
+#include "glad/glad.h"
 
 namespace Dolan {
 
