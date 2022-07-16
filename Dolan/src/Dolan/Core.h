@@ -10,6 +10,10 @@
 	#error Dolan only supports Windows!
 #endif // DN_PLATFORM_WINDOWS
 
+#ifdef DN_DEBUG
+	#define DN_ENABLE_ASSERTS
+#endif
+
 #ifdef DN_ENABLE_ASSERTS
 	#define DN_ASSERT(x, ...) { if (!x) { DN_ERROR("Assertion failed: {0}", __VA_ARGS__); __debugbreak(); } }
 	#define DN_CORE_ASSERT(x, ...) { if (!x) { DN_CORE_ERROR("Assertion failed: {0}", __VA_ARGS__); __debugbreak(); } }
