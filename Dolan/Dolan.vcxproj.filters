@@ -7,8 +7,14 @@
     <Filter Include="Dolan\Events">
       <UniqueIdentifier>{5759D553-43BC-64F8-EC41-9DAED883307B}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Dolan\ImGui">
+      <UniqueIdentifier>{3DC09E48-A975-173E-326A-11159E1E0E42}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Platform">
       <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform\OpenGL">
+      <UniqueIdentifier>{1E7D2C1D-8A08-9AE1-9319-1DD6FF23F6E1}</UniqueIdentifier>
     </Filter>
     <Filter Include="Platform\Windows">
       <UniqueIdentifier>{64FBD71A-50F4-F66C-7926-DCF1657ED678}</UniqueIdentifier>
@@ -37,6 +43,9 @@
     <ClInclude Include="src\Dolan\Events\MouseEvent.h">
       <Filter>Dolan\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\Dolan\ImGui\ImGuiLayer.h">
+      <Filter>Dolan\ImGui</Filter>
+    </ClInclude>
     <ClInclude Include="src\Dolan\Layer.h">
       <Filter>Dolan</Filter>
     </ClInclude>
@@ -49,6 +58,9 @@
     <ClInclude Include="src\Dolan\Window.h">
       <Filter>Dolan</Filter>
     </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h">
+      <Filter>Platform\OpenGL</Filter>
+    </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
       <Filter>Platform\Windows</Filter>
     </ClInclude>
@@ -58,6 +70,9 @@
     <ClCompile Include="src\Dolan\Application.cpp">
       <Filter>Dolan</Filter>
     </ClCompile>
+    <ClCompile Include="src\Dolan\ImGui\ImGuiLayer.cpp">
+      <Filter>Dolan\ImGui</Filter>
+    </ClCompile>
     <ClCompile Include="src\Dolan\Layer.cpp">
       <Filter>Dolan</Filter>
     </ClCompile>
@@ -66,6 +81,9 @@
     </ClCompile>
     <ClCompile Include="src\Dolan\Log.cpp">
       <Filter>Dolan</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp">
+      <Filter>Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
       <Filter>Platform\Windows</Filter>
