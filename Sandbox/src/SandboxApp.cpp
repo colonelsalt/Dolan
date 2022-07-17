@@ -8,12 +8,18 @@ public:
 
 	void OnUpdate() override
 	{
-		DN_TRACE("Sandbox updating...");
+		// DN_TRACE("Sandbox updating...");
+		if (Dolan::Input::IsKeyPressed(DN_KEY_TAB))
+			DN_TRACE("Tab key pressed!");
 	}
 
 	void OnEvent(Dolan::Event& e) override
 	{
-		DN_TRACE("{0}", e);
+		if (e.GetEventType() == Dolan::EventType::KeyPressed)
+		{
+			Dolan::KeyPressedEvent& keyPressedEvent = (Dolan::KeyPressedEvent&)e;
+			DN_TRACE("{0}", (char)keyPressedEvent.GetKeyCode());
+		}
 	}
 };
 

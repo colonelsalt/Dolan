@@ -67,6 +67,8 @@
     <ClInclude Include="src\dnpch.h" />
     <ClInclude Include="src\Dolan\Input.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
+    <ClInclude Include="src\Dolan\KeyCodes.h" />
+    <ClInclude Include="src\Dolan\MouseButtonCodes.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Dolan\Application.cpp">

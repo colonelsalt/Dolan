@@ -159,9 +159,11 @@
     <ClInclude Include="src\Dolan\Events\MouseEvent.h" />
     <ClInclude Include="src\Dolan\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\Dolan\Input.h" />
+    <ClInclude Include="src\Dolan\KeyCodes.h" />
     <ClInclude Include="src\Dolan\Layer.h" />
     <ClInclude Include="src\Dolan\LayerStack.h" />
     <ClInclude Include="src\Dolan\Log.h" />
+    <ClInclude Include="src\Dolan\MouseButtonCodes.h" />
     <ClInclude Include="src\Dolan\Window.h" />
     <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
