@@ -2,6 +2,7 @@
 #include "Application.h"
 
 #include "Dolan/Log.h"
+#include "Input.h"
 
 #include "glad/glad.h"
 
@@ -64,7 +65,8 @@ namespace Dolan {
 				layer->OnUpdate();
 			
 			m_Window->OnUpdate();
-			
+			auto [x, y] = Input::GetMousePosition();
+			DN_CORE_TRACE("Mouse position: {0}, {1}", x, y);
 		}
 	}
 
