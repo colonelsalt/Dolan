@@ -6,6 +6,7 @@
 #include "Events/Event.h"
 #include "Events/ApplicationEvent.h"
 
+#include "Dolan/ImGui/ImGuiLayer.h"
 
 namespace Dolan {
 	class DOLAN_API Application
@@ -27,6 +28,7 @@ namespace Dolan {
 		bool OnWindowClose(WindowCloseEvent& e);
 
 		std::unique_ptr<Window> m_Window;
+		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 

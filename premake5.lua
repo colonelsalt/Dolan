@@ -11,6 +11,7 @@ workspace "Dolan"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+-- Include directories relative to root folder (solution directory)
 IncludeDir = {}
 IncludeDir["GLFW"] = "Dolan/vendor/GLFW/include"
 IncludeDir["Glad"] = "Dolan/vendor/Glad/include"
@@ -36,7 +37,9 @@ project "Dolan"
 	files
 	{
 		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp"
+		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/vendor/glm/glm/**.hpp",
+		"%{prj.name}/vendor/glm/glm/**.inl",
 	}
 
 	includedirs
@@ -49,8 +52,8 @@ project "Dolan"
 		"%{IncludeDir.glm}"
 	}
 
-	links
-	{
+	links 
+	{ 
 		"GLFW",
 		"Glad",
 		"ImGui",
@@ -65,8 +68,7 @@ project "Dolan"
 		{
 			"DN_PLATFORM_WINDOWS",
 			"DN_BUILD_DLL",
-			"GLFW_INCLUDE_NONE",
-			"IMGUI_IMPL_OPENGL_LOADER_CUSTOM"
+			"GLFW_INCLUDE_NONE"
 		}
 
 		postbuildcommands
@@ -108,6 +110,7 @@ project "Sandbox"
 	{
 		"Dolan/vendor/spdlog/include",
 		"Dolan/src",
+		"Dolan/vendor",
 		"%{IncludeDir.glm}"
 	}
 

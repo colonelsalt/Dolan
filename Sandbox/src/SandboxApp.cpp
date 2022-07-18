@@ -1,5 +1,7 @@
 #include <Dolan.h>
 
+//#include "imgui/imgui.h"
+
 class ExampleLayer : public Dolan::Layer
 {
 public:
@@ -11,6 +13,13 @@ public:
 		// DN_TRACE("Sandbox updating...");
 		if (Dolan::Input::IsKeyPressed(DN_KEY_TAB))
 			DN_TRACE("Tab key pressed!");
+	}
+
+	virtual void OnImGuiRender() override
+	{
+		//ImGui::Begin("Test");
+		//ImGui::Text("Hello, sup");
+		//ImGui::End();
 	}
 
 	void OnEvent(Dolan::Event& e) override
@@ -29,7 +38,6 @@ public:
 	Sandbox()
 	{
 		PushLayer(new ExampleLayer());
-		PushOverlay(new Dolan::ImGuiLayer());
 	}
 
 	~Sandbox()
