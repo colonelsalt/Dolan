@@ -46,6 +46,12 @@
     <ClInclude Include="src\Dolan\ImGui\ImGuiLayer.h">
       <Filter>Dolan\ImGui</Filter>
     </ClInclude>
+    <ClInclude Include="src\Dolan\Input.h">
+      <Filter>Dolan</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Dolan\KeyCodes.h">
+      <Filter>Dolan</Filter>
+    </ClInclude>
     <ClInclude Include="src\Dolan\Layer.h">
       <Filter>Dolan</Filter>
     </ClInclude>
@@ -55,20 +61,22 @@
     <ClInclude Include="src\Dolan\Log.h">
       <Filter>Dolan</Filter>
     </ClInclude>
+    <ClInclude Include="src\Dolan\MouseButtonCodes.h">
+      <Filter>Dolan</Filter>
+    </ClInclude>
     <ClInclude Include="src\Dolan\Window.h">
       <Filter>Dolan</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h">
       <Filter>Platform\OpenGL</Filter>
     </ClInclude>
+    <ClInclude Include="src\Platform\Windows\WindowsInput.h">
+      <Filter>Platform\Windows</Filter>
+    </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
       <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\dnpch.h" />
-    <ClInclude Include="src\Dolan\Input.h" />
-    <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
-    <ClInclude Include="src\Dolan\KeyCodes.h" />
-    <ClInclude Include="src\Dolan\MouseButtonCodes.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Dolan\Application.cpp">
@@ -89,10 +97,12 @@
     <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp">
       <Filter>Platform\OpenGL</Filter>
     </ClCompile>
+    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp">
+      <Filter>Platform\Windows</Filter>
+    </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
       <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\dnpch.cpp" />
-    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
   </ItemGroup>
 </Project>
