@@ -1,6 +1,6 @@
 #include <Dolan.h>
 
-//#include "imgui/imgui.h"
+#include "imgui/imgui.h"
 
 class ExampleLayer : public Dolan::Layer
 {
@@ -17,9 +17,9 @@ public:
 
 	virtual void OnImGuiRender() override
 	{
-		//ImGui::Begin("Test");
-		//ImGui::Text("Hello, sup");
-		//ImGui::End();
+		ImGui::Begin("Test");
+		ImGui::Text("Hello, sup");
+		ImGui::End();
 	}
 
 	void OnEvent(Dolan::Event& e) override
