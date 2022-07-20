@@ -9,7 +9,7 @@ namespace Dolan {
 	OpenGlContext::OpenGlContext(GLFWwindow* windowHandle)
 		: m_WindowHandle(windowHandle)
 	{
-		DN_CORE_ASSERT(m_WindowHandle, "Window handle is null!");
+		DN_CORE_ASSERT(windowHandle, "Window handle is null!");
 	}
 
 	void OpenGlContext::Init()
