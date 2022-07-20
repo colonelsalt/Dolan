@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Dolan/Window.h"
+#include "Dolan/Renderer/GraphicsContext.h"
 
 #include <GLFW/glfw3.h>
 
@@ -31,6 +32,7 @@ namespace Dolan {
 
 	private:
 		GLFWwindow* m_Window;
+		GraphicsContext* m_Context;
 
 		struct WindowData
 		{
