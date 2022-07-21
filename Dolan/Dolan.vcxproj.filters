@@ -1346,6 +1346,7 @@
     </ClInclude>
     <ClInclude Include="src\Dolan\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGlContext.h" />
+    <ClInclude Include="src\Dolan\Renderer\Shader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Dolan\Application.cpp">
@@ -1376,5 +1377,6 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGlContext.cpp" />
+    <ClCompile Include="src\Dolan\Renderer\Shader.cpp" />
   </ItemGroup>
 </Project>

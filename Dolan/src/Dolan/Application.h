@@ -7,6 +7,7 @@
 #include "Events/ApplicationEvent.h"
 
 #include "Dolan/ImGui/ImGuiLayer.h"
+#include "Dolan/Renderer/Shader.h"
 
 namespace Dolan {
 	class DOLAN_API Application
@@ -33,6 +34,8 @@ namespace Dolan {
 		LayerStack m_LayerStack;
 
 		unsigned int m_VertexArray, m_VertexBuffer, m_IndexBuffer;
+
+		std::unique_ptr<Shader> m_Shader;
 	private:
 		static Application* s_Instance;
 	};
