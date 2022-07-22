@@ -76,7 +76,6 @@ namespace Dolan {
 			std::vector<GLchar> infoLog(maxLength);
 			glGetProgramInfoLog(m_RendererId, maxLength, &maxLength, &infoLog[0]);
 
-
 			glDeleteProgram(m_RendererId);
 			glDeleteShader(vertexShader);
 			glDeleteShader(fragmentShader);

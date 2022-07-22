@@ -1347,6 +1347,9 @@
     <ClInclude Include="src\Dolan\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGlContext.h" />
     <ClInclude Include="src\Dolan\Renderer\Shader.h" />
+    <ClInclude Include="src\Dolan\Renderer\Buffer.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGlBuffer.h" />
+    <ClInclude Include="src\Dolan\Renderer\Renderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Dolan\Application.cpp">
@@ -1378,5 +1381,8 @@
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGlContext.cpp" />
     <ClCompile Include="src\Dolan\Renderer\Shader.cpp" />
+    <ClCompile Include="src\Dolan\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGlBuffer.cpp" />
+    <ClCompile Include="src\Dolan\Renderer\Renderer.cpp" />
   </ItemGroup>
 </Project>

@@ -155,8 +155,11 @@
     <ClInclude Include="src\Dolan\LayerStack.h" />
     <ClInclude Include="src\Dolan\Log.h" />
     <ClInclude Include="src\Dolan\MouseButtonCodes.h" />
+    <ClInclude Include="src\Dolan\Renderer\Buffer.h" />
     <ClInclude Include="src\Dolan\Renderer\GraphicsContext.h" />
+    <ClInclude Include="src\Dolan\Renderer\Renderer.h" />
     <ClInclude Include="src\Dolan\Renderer\Shader.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGlBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGlContext.h" />
     <ClInclude Include="src\Dolan\Window.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
@@ -585,7 +588,10 @@
     <ClCompile Include="src\Dolan\Layer.cpp" />
     <ClCompile Include="src\Dolan\LayerStack.cpp" />
     <ClCompile Include="src\Dolan\Log.cpp" />
+    <ClCompile Include="src\Dolan\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\Dolan\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Dolan\Renderer\Shader.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGlBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGlContext.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
