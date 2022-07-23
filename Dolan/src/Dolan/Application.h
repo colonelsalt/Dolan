@@ -9,6 +9,7 @@
 #include "Dolan/ImGui/ImGuiLayer.h"
 #include "Dolan/Renderer/Shader.h"
 #include "Dolan/Renderer/Buffer.h"
+#include "Dolan/Renderer/VertexArray.h"
 
 namespace Dolan {
 	class DOLAN_API Application
@@ -34,10 +35,12 @@ namespace Dolan {
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 
-		unsigned int m_VertexArray;
-		std::unique_ptr<Shader> m_Shader;
-		std::unique_ptr<VertexBuffer> m_VertexBuffer;
-		std::unique_ptr<IndexBuffer> m_IndexBuffer;
+		std::shared_ptr<Shader> m_Shader;
+		std::shared_ptr<VertexArray> m_VertexArray;
+
+		std::shared_ptr<Shader> m_BlueShader;
+		std::shared_ptr<VertexArray> m_SquareVa;
+
 	private:
 		static Application* s_Instance;
 	};

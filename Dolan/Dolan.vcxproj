@@ -159,9 +159,11 @@
     <ClInclude Include="src\Dolan\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\Dolan\Renderer\Renderer.h" />
     <ClInclude Include="src\Dolan\Renderer\Shader.h" />
+    <ClInclude Include="src\Dolan\Renderer\VertexArray.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGlBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGlContext.h" />
     <ClInclude Include="src\Dolan\Window.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGlVertexArray.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\dnpch.h" />
@@ -591,8 +593,10 @@
     <ClCompile Include="src\Dolan\Renderer\Buffer.cpp" />
     <ClCompile Include="src\Dolan\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Dolan\Renderer\Shader.cpp" />
+    <ClCompile Include="src\Dolan\Renderer\VertexArray.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGlBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGlContext.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGlVertexArray.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\dnpch.cpp">
