@@ -10,10 +10,10 @@ namespace Dolan {
 	{
 		switch (Renderer::GetApi())
 		{
-		case RendererApi::None:
+		case RendererApi::Api::None:
 			DN_CORE_ASSERT(false, "Unknown renderer API.");
 			return nullptr;
-		case RendererApi::OpenGL:
+		case RendererApi::Api::OpenGL:
 			return new OpenGlVertexArray();
 		}
 

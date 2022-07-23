@@ -10,10 +10,10 @@ namespace Dolan {
 	{
 		switch (Renderer::GetApi())
 		{
-		case RendererApi::None:
+		case RendererApi::Api::None:
 			DN_CORE_ASSERT(false, "Renderer API 'NONE' is not supported");
 			return nullptr;
-		case RendererApi::OpenGL:
+		case RendererApi::Api::OpenGL:
 			return new OpenGlVertexBuffer(vertices, size);
 		}
 
@@ -25,10 +25,10 @@ namespace Dolan {
 	{
 		switch (Renderer::GetApi())
 		{
-		case RendererApi::None:
+		case RendererApi::Api::None:
 			DN_CORE_ASSERT(false, "Renderer API 'NONE' is not supported");
 			return nullptr;
-		case RendererApi::OpenGL:
+		case RendererApi::Api::OpenGL:
 			return new OpenGlIndexBuffer(indices, count);
 		}
 
