@@ -7,13 +7,9 @@
 #include "Events/ApplicationEvent.h"
 
 #include "Dolan/ImGui/ImGuiLayer.h"
-#include "Dolan/Renderer/Shader.h"
-#include "Dolan/Renderer/Buffer.h"
-#include "Dolan/Renderer/VertexArray.h"
-#include "Renderer/OrthographicCamera.h"
 
 namespace Dolan {
-	class DOLAN_API Application
+	class Application
 	{
 	public:
 		Application();
@@ -35,14 +31,6 @@ namespace Dolan {
 		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
-
-		std::shared_ptr<Shader> m_Shader;
-		std::shared_ptr<VertexArray> m_VertexArray;
-
-		std::shared_ptr<Shader> m_BlueShader;
-		std::shared_ptr<VertexArray> m_SquareVa;
-
-		OrthographicCamera m_Camera;
 
 	private:
 		static Application* s_Instance;
