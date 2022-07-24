@@ -10,6 +10,7 @@
 #include "Dolan/Renderer/Shader.h"
 #include "Dolan/Renderer/Buffer.h"
 #include "Dolan/Renderer/VertexArray.h"
+#include "Renderer/OrthographicCamera.h"
 
 namespace Dolan {
 	class DOLAN_API Application
@@ -40,6 +41,8 @@ namespace Dolan {
 
 		std::shared_ptr<Shader> m_BlueShader;
 		std::shared_ptr<VertexArray> m_SquareVa;
+
+		OrthographicCamera m_Camera;
 
 	private:
 		static Application* s_Instance;
