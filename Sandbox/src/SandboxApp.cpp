@@ -119,22 +119,22 @@ public:
 		m_BlueShader.reset(new Dolan::Shader(blueShaderVertSrc, blueShaderFragSrc));
 	}
 
-	void OnUpdate() override
+	void OnUpdate(Dolan::Timestep ts) override
 	{
 		if (Dolan::Input::IsKeyPressed(DN_KEY_LEFT))
-			m_CameraPos.x -= m_CameraMoveSpeed;
+			m_CameraPos.x -= m_CameraMoveSpeed * ts;
 		else if (Dolan::Input::IsKeyPressed(DN_KEY_RIGHT))
-			m_CameraPos.x += m_CameraMoveSpeed;
+			m_CameraPos.x += m_CameraMoveSpeed * ts;
 		
 		if (Dolan::Input::IsKeyPressed(DN_KEY_UP))
-			m_CameraPos.y += m_CameraMoveSpeed;
+			m_CameraPos.y += m_CameraMoveSpeed * ts;
 		else if (Dolan::Input::IsKeyPressed(DN_KEY_DOWN))
-			m_CameraPos.y -= m_CameraMoveSpeed;
+			m_CameraPos.y -= m_CameraMoveSpeed * ts;
 
 		if (Dolan::Input::IsKeyPressed(DN_KEY_A))
-			m_CameraRot += m_CameraRotSpeed;
+			m_CameraRot += m_CameraRotSpeed * ts;
 		if (Dolan::Input::IsKeyPressed(DN_KEY_D))
-			m_CameraRot -= m_CameraRotSpeed;
+			m_CameraRot -= m_CameraRotSpeed * ts;
 
 		Dolan::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		Dolan::RenderCommand::Clear();
@@ -170,8 +170,8 @@ private:
 	Dolan::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPos;
 	float m_CameraRot = 0.0f;
-	float m_CameraRotSpeed = 2.0f;
-	float m_CameraMoveSpeed = 0.1f;
+	float m_CameraRotSpeed = 180.0f;
+	float m_CameraMoveSpeed = 5.0f;
 };
 
 class Sandbox : public Dolan::Application

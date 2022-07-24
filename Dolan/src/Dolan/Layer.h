@@ -2,6 +2,7 @@
 
 #include "Dolan/Core.h"
 #include "Dolan/Events/Event.h"
+#include "Dolan/Core/Timestep.h"
 
 namespace Dolan {
 	class DOLAN_API Layer
@@ -12,7 +13,7 @@ namespace Dolan {
 
 		virtual void OnAttach() {}
 		virtual void OnDetach() {}
-		virtual void OnUpdate() {}
+		virtual void OnUpdate(Timestep ts) {}
 		virtual void OnImGuiRender() {}
 		virtual void OnEvent(Event& e) {}
 

@@ -143,6 +143,7 @@
     <ClInclude Include="src\Dolan.h" />
     <ClInclude Include="src\Dolan\Application.h" />
     <ClInclude Include="src\Dolan\Core.h" />
+    <ClInclude Include="src\Dolan\Core\Timestep.h" />
     <ClInclude Include="src\Dolan\EntryPoint.h" />
     <ClInclude Include="src\Dolan\Events\ApplicationEvent.h" />
     <ClInclude Include="src\Dolan\Events\Event.h" />

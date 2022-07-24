@@ -1356,6 +1356,7 @@
     <ClInclude Include="src\Dolan\Renderer\RenderCommand.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGlRendererApi.h" />
     <ClInclude Include="src\Dolan\Renderer\OrthographicCamera.h" />
+    <ClInclude Include="src\Dolan\Core\Timestep.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Dolan\Application.cpp">

@@ -6,6 +6,8 @@
 #include "Events/Event.h"
 #include "Events/ApplicationEvent.h"
 
+#include "Dolan/Core/Timestep.h"
+
 #include "Dolan/ImGui/ImGuiLayer.h"
 
 namespace Dolan {
@@ -31,7 +33,7 @@ namespace Dolan {
 		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
-
+		float m_LastFrameTime = 0.0f;
 	private:
 		static Application* s_Instance;
 	};

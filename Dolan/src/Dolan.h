@@ -4,6 +4,8 @@
 #include "Dolan/Layer.h"
 #include "Dolan/Log.h"
 
+#include "Dolan/Core/Timestep.h"
+
 #include "Dolan/Input.h"
 #include "Dolan/KeyCodes.h"
 #include "Dolan/MouseButtonCodes.h"
