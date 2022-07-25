@@ -45,7 +45,7 @@ namespace Dolan {
 		glBindVertexArray(0);
 	}
 
-	void OpenGlVertexArray::AddVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuffer)
+	void OpenGlVertexArray::AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer)
 	{
 		DN_CORE_ASSERT(vertexBuffer->GetLayout().GetElements().size(), "Vertex buffer has no layout.");
 
@@ -69,7 +69,7 @@ namespace Dolan {
 		m_VertexBuffers.push_back(vertexBuffer);
 	}
 
-	void OpenGlVertexArray::SetIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer)
+	void OpenGlVertexArray::SetIndexBuffer(const Ref<IndexBuffer>& indexBuffer)
 	{
 		glBindVertexArray(m_RendererId);
 		indexBuffer->Bind();
