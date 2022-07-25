@@ -17,6 +17,7 @@ IncludeDir["GLFW"] = "Dolan/vendor/GLFW/include"
 IncludeDir["Glad"] = "Dolan/vendor/Glad/include"
 IncludeDir["ImGui"] = "Dolan/vendor/imgui"
 IncludeDir["glm"] = "Dolan/vendor/glm"
+IncludeDir["stb_image"] = "Dolan/vendor/stb_image"
 
 include "Dolan/vendor/GLFW"
 include "Dolan/vendor/Glad"
@@ -39,6 +40,8 @@ project "Dolan"
 	{
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/vendor/stb_image/**.cpp",
+		"%{prj.name}/vendor/stb_image/**.h",
 		"%{prj.name}/vendor/glm/glm/**.hpp",
 		"%{prj.name}/vendor/glm/glm/**.inl",
 	}
@@ -55,7 +58,8 @@ project "Dolan"
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.ImGui}",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.stb_image}"
 	}
 
 	links 

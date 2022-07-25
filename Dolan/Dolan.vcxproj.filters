@@ -7,14 +7,23 @@
     <Filter Include="src\Dolan">
       <UniqueIdentifier>{2A47C9B2-96B1-7D29-DFEF-2ECF4B995B7E}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Dolan\Core">
+      <UniqueIdentifier>{C2751FDC-AE43-13E2-97D7-83088344EF46}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Dolan\Events">
       <UniqueIdentifier>{CEFFF566-BAF8-14B9-E32A-FA3DCF82F4C4}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Dolan\ImGui">
       <UniqueIdentifier>{D4F37860-407F-E624-4990-6919B59A4225}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Dolan\Renderer">
+      <UniqueIdentifier>{103A70F3-FC1D-3149-657E-2B9C51811BCB}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Platform">
       <UniqueIdentifier>{21CA02E5-0D2D-9289-B6B2-CA3FA2F45D0C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Platform\OpenGL">
+      <UniqueIdentifier>{35A49437-A105-7245-2A73-B8F796D3A804}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Platform\Windows">
       <UniqueIdentifier>{5B054582-4794-CE4B-F0B2-E246DC20DFF1}</UniqueIdentifier>
@@ -40,6 +49,9 @@
     <Filter Include="vendor\glm\glm\gtx">
       <UniqueIdentifier>{B3A6A76B-9F8A-68C1-08EB-6214F4ED5243}</UniqueIdentifier>
     </Filter>
+    <Filter Include="vendor\stb_image">
+      <UniqueIdentifier>{0DA0BA59-F998-D9AB-22CB-BE300E23B9B7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Dolan.h">
@@ -50,6 +62,9 @@
     </ClInclude>
     <ClInclude Include="src\Dolan\Core.h">
       <Filter>src\Dolan</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Dolan\Core\Timestep.h">
+      <Filter>src\Dolan\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Dolan\EntryPoint.h">
       <Filter>src\Dolan</Filter>
@@ -87,8 +102,53 @@
     <ClInclude Include="src\Dolan\MouseButtonCodes.h">
       <Filter>src\Dolan</Filter>
     </ClInclude>
+    <ClInclude Include="src\Dolan\Renderer\Buffer.h">
+      <Filter>src\Dolan\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Dolan\Renderer\GraphicsContext.h">
+      <Filter>src\Dolan\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Dolan\Renderer\OrthographicCamera.h">
+      <Filter>src\Dolan\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Dolan\Renderer\RenderCommand.h">
+      <Filter>src\Dolan\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Dolan\Renderer\Renderer.h">
+      <Filter>src\Dolan\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Dolan\Renderer\RendererApi.h">
+      <Filter>src\Dolan\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Dolan\Renderer\Shader.h">
+      <Filter>src\Dolan\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Dolan\Renderer\Texture.h">
+      <Filter>src\Dolan\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Dolan\Renderer\VertexArray.h">
+      <Filter>src\Dolan\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\Dolan\Window.h">
       <Filter>src\Dolan</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGlBuffer.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGlContext.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGlRendererApi.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGlShader.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGlTexture.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGlVertexArray.h">
+      <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsInput.h">
       <Filter>src\Platform\Windows</Filter>
@@ -1344,20 +1404,9 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp">
       <Filter>vendor\glm\glm</Filter>
     </ClInclude>
-    <ClInclude Include="src\Dolan\Renderer\GraphicsContext.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGlContext.h" />
-    <ClInclude Include="src\Dolan\Renderer\Shader.h" />
-    <ClInclude Include="src\Dolan\Renderer\Buffer.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGlBuffer.h" />
-    <ClInclude Include="src\Dolan\Renderer\Renderer.h" />
-    <ClInclude Include="src\Dolan\Renderer\VertexArray.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGlVertexArray.h" />
-    <ClInclude Include="src\Dolan\Renderer\RendererApi.h" />
-    <ClInclude Include="src\Dolan\Renderer\RenderCommand.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGlRendererApi.h" />
-    <ClInclude Include="src\Dolan\Renderer\OrthographicCamera.h" />
-    <ClInclude Include="src\Dolan\Core\Timestep.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGlShader.h" />
+    <ClInclude Include="vendor\stb_image\stb_image.h">
+      <Filter>vendor\stb_image</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Dolan\Application.cpp">
@@ -1378,6 +1427,48 @@
     <ClCompile Include="src\Dolan\Log.cpp">
       <Filter>src\Dolan</Filter>
     </ClCompile>
+    <ClCompile Include="src\Dolan\Renderer\Buffer.cpp">
+      <Filter>src\Dolan\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Dolan\Renderer\OrthographicCamera.cpp">
+      <Filter>src\Dolan\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Dolan\Renderer\RenderCommand.cpp">
+      <Filter>src\Dolan\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Dolan\Renderer\Renderer.cpp">
+      <Filter>src\Dolan\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Dolan\Renderer\RendererApi.cpp">
+      <Filter>src\Dolan\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Dolan\Renderer\Shader.cpp">
+      <Filter>src\Dolan\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Dolan\Renderer\Texture.cpp">
+      <Filter>src\Dolan\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Dolan\Renderer\VertexArray.cpp">
+      <Filter>src\Dolan\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGlBuffer.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGlContext.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGlRendererApi.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGlShader.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGlTexture.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGlVertexArray.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp">
       <Filter>src\Platform\Windows</Filter>
     </ClCompile>
@@ -1387,17 +1478,8 @@
     <ClCompile Include="src\dnpch.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\OpenGlContext.cpp" />
-    <ClCompile Include="src\Dolan\Renderer\Shader.cpp" />
-    <ClCompile Include="src\Dolan\Renderer\Buffer.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\OpenGlBuffer.cpp" />
-    <ClCompile Include="src\Dolan\Renderer\Renderer.cpp" />
-    <ClCompile Include="src\Dolan\Renderer\VertexArray.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\OpenGlVertexArray.cpp" />
-    <ClCompile Include="src\Dolan\Renderer\RendererApi.cpp" />
-    <ClCompile Include="src\Dolan\Renderer\RenderCommand.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\OpenGlRendererApi.cpp" />
-    <ClCompile Include="src\Dolan\Renderer\OrthographicCamera.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\OpenGlShader.cpp" />
+    <ClCompile Include="vendor\stb_image\stb_image.cpp">
+      <Filter>vendor\stb_image</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

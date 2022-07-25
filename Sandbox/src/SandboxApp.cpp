@@ -38,17 +38,18 @@ public:
 
 		m_SquareVa.reset(Dolan::VertexArray::Create());
 
-		float squareVertices[3 * 4] = {
-			-0.5f, -0.5f, 0.0f,
-			 0.5f, -0.5f, 0.0f,
-			 0.5f,  0.5f, 0.0f,
-			-0.5f,  0.5f, 0.0f,
+		float squareVertices[5 * 4] = {
+			-0.5f, -0.5f, 0.0f,		0.0f, 0.0f,
+			 0.5f, -0.5f, 0.0f,		1.0f, 0.0f,
+			 0.5f,  0.5f, 0.0f,		1.0f, 1.0f,
+			-0.5f,  0.5f, 0.0f,		0.0f, 1.0f
 		};
 
 		Dolan::Ref<Dolan::VertexBuffer> squareVb;
 		squareVb.reset(Dolan::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 		squareVb->SetLayout({
-			{ Dolan::ShaderDataType::Float3, "a_Position" }
+			{ Dolan::ShaderDataType::Float3, "a_Position" },
+			{ Dolan::ShaderDataType::Float2, "a_TexCoord" }
 			});
 		m_SquareVa->AddVertexBuffer(squareVb);
 
@@ -126,6 +127,46 @@ public:
 			}
 		)";
 		m_FlatColorShader.reset(Dolan::Shader::Create(flatColorShaderVertSrc, flatColorShaderFragSrc));
+
+		std::string textureShaderVertSrc = R"(
+			#version 330 core
+				
+			layout(location = 0) in vec3 a_Position;		
+			layout(location = 1) in vec2 a_TexCoord;		
+
+			uniform mat4 u_ViewProjection;
+			uniform mat4 u_Transform;
+
+			out vec2 v_TexCoord;
+
+			void main()
+			{
+				v_TexCoord = a_TexCoord;
+				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
+			}
+		)";
+
+		std::string textureShaderFragSrc = R"(
+			#version 330 core
+				
+			layout(location = 0) out vec4 color;
+
+			in vec2 v_TexCoord;
+
+			uniform sampler2D u_Texture;
+
+			void main()
+			{
+				color = texture(u_Texture, v_TexCoord);
+			}
+		)";
+		m_TextureShader.reset(Dolan::Shader::Create(textureShaderVertSrc, textureShaderFragSrc));
+
+		m_Texture = Dolan::Texture2d::Create("assets/textures/Checkerboard.png");
+
+		std::dynamic_pointer_cast<Dolan::OpenGlShader>(m_TextureShader)->Bind();
+		std::dynamic_pointer_cast<Dolan::OpenGlShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
+
 	}
 
 	void OnUpdate(Dolan::Timestep ts) override
@@ -168,7 +209,8 @@ public:
 			}
 		}
 
-		Dolan::Renderer::Submit(m_Shader, m_VertexArray);
+		m_Texture->Bind();
+		Dolan::Renderer::Submit(m_TextureShader, m_SquareVa, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 		
 		Dolan::Renderer::EndScene();
 	}
@@ -189,8 +231,10 @@ private:
 	Dolan::Ref<Dolan::Shader> m_Shader;
 	Dolan::Ref<Dolan::VertexArray> m_VertexArray;
 
-	Dolan::Ref<Dolan::Shader> m_FlatColorShader;
+	Dolan::Ref<Dolan::Shader> m_FlatColorShader, m_TextureShader;
 	Dolan::Ref<Dolan::VertexArray> m_SquareVa;
+
+	Dolan::Ref<Dolan::Texture2d> m_Texture;
 
 	Dolan::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPos;

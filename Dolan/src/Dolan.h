@@ -17,6 +17,7 @@
 
 #include "Dolan/Renderer/Buffer.h"
 #include "Dolan/Renderer/Shader.h"
+#include "Dolan/Renderer/Texture.h"
 #include "Dolan/Renderer/VertexArray.h"
 
 #include "Dolan/Renderer/OrthographicCamera.h"

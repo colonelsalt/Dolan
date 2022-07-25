@@ -1,12 +1,12 @@
 #include "dnpch.h"
-#include "VertexArray.h"
+#include "Texture.h"
 
 #include "Renderer.h"
-#include "Platform/OpenGL/OpenGlVertexArray.h"
+#include "Platform/OpenGL/OpenGlTexture.h"
 
 namespace Dolan {
 
-	VertexArray* VertexArray::Create()
+	Ref<Texture2d> Texture2d::Create(const std::string& path)
 	{
 		switch (Renderer::GetApi())
 		{
@@ -14,7 +14,7 @@ namespace Dolan {
 				DN_CORE_ASSERT(false, "Unknown renderer API.");
 				return nullptr;
 			case RendererApi::Api::OpenGL:
-				return new OpenGlVertexArray();
+				return std::make_shared<OpenGlTexture2d>(path);
 		}
 
 		DN_CORE_ASSERT(false, "Unknown renderer API.");
