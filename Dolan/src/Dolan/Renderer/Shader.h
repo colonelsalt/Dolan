@@ -1,22 +1,18 @@
 #pragma once
 
 #include <string>
-#include <glm/glm.hpp>
 
 namespace Dolan {
 
 	class Shader
 	{
 	public:
-		Shader(std::string vertSrc, std::string fragSrc);
-		~Shader();
+		virtual ~Shader() = default;
 
-		void Bind() const;
-		void UnBind() const;
+		virtual void Bind() const = 0;
+		virtual void UnBind() const = 0;
 
-		void UploadUniformMat4(const std::string& name, const glm::mat4& uniform);
-	private:
-		uint32_t m_RendererId;
+		static Shader* Create(std::string& vertSrc, std::string& fragSrc);
 	};
 
 }
