@@ -7,6 +7,10 @@ namespace Dolan {
 	class RenderCommand
 	{
 	public:
+		inline static void Init()
+		{
+			s_RendererApi->Init();
+		}
 
 		inline static void SetClearColor(const glm::vec4& color)
 		{

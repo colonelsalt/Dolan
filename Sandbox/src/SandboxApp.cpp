@@ -163,6 +163,7 @@ public:
 		m_TextureShader.reset(Dolan::Shader::Create(textureShaderVertSrc, textureShaderFragSrc));
 
 		m_Texture = Dolan::Texture2d::Create("assets/textures/Checkerboard.png");
+		m_ChernoLogoTexture = Dolan::Texture2d::Create("assets/textures/ChernoLogo.png");
 
 		std::dynamic_pointer_cast<Dolan::OpenGlShader>(m_TextureShader)->Bind();
 		std::dynamic_pointer_cast<Dolan::OpenGlShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
@@ -212,6 +213,9 @@ public:
 		m_Texture->Bind();
 		Dolan::Renderer::Submit(m_TextureShader, m_SquareVa, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 		
+		m_ChernoLogoTexture->Bind();
+		Dolan::Renderer::Submit(m_TextureShader, m_SquareVa,glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+
 		Dolan::Renderer::EndScene();
 	}
 
@@ -234,7 +238,7 @@ private:
 	Dolan::Ref<Dolan::Shader> m_FlatColorShader, m_TextureShader;
 	Dolan::Ref<Dolan::VertexArray> m_SquareVa;
 
-	Dolan::Ref<Dolan::Texture2d> m_Texture;
+	Dolan::Ref<Dolan::Texture2d> m_Texture, m_ChernoLogoTexture;
 
 	Dolan::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPos;
