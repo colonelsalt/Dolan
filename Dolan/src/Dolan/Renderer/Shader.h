@@ -12,7 +12,8 @@ namespace Dolan {
 		virtual void Bind() const = 0;
 		virtual void UnBind() const = 0;
 
-		static Shader* Create(std::string& vertSrc, std::string& fragSrc);
+		static Shader* Create(const std::string& filepath);
+		static Shader* Create(const std::string& vertSrc, const std::string& fragSrc);
 	};
 
 }
