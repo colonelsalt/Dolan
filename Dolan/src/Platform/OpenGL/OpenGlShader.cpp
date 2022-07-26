@@ -24,9 +24,21 @@ namespace Dolan {
 		auto shaderSources = PreProcess(rawSource);
 
 		Compile(shaderSources);
+
+		// Extract name from file path
+		size_t lastSlash = filepath.find_last_of("/\\");
+		if (lastSlash == std::string::npos)
+			lastSlash = 0;
+		else
+			lastSlash += 1;
+		size_t lastDot = filepath.rfind('.');
+
+		size_t nameLength = (lastDot == std::string::npos) ? filepath.size() - lastSlash : lastDot - lastSlash;
+		m_Name = filepath.substr(lastSlash, nameLength);
 	}
 
-	OpenGlShader::OpenGlShader(const std::string& vertSrc, const std::string& fragSrc)
+	OpenGlShader::OpenGlShader(const std::string& name, const std::string& vertSrc, const std::string& fragSrc)
+		: m_Name(name)
 	{
 		std::unordered_map<GLenum, std::string> sources;
 		sources[GL_VERTEX_SHADER] = vertSrc;
@@ -38,7 +50,7 @@ namespace Dolan {
 	std::string OpenGlShader::ReadFile(const std::string& filepath)
 	{
 		std::string result;
-		std::ifstream in(filepath, std::ios::in, std::ios::binary);
+		std::ifstream in(filepath, std::ios::in | std::ios::binary);
 		if (in)
 		{
 			in.seekg(0, std::ios::end);
@@ -82,7 +94,9 @@ namespace Dolan {
 	void OpenGlShader::Compile(const std::unordered_map<GLenum, std::string>& shaderSources)
 	{
 		GLuint program = glCreateProgram();
-		std::vector<GLenum> glShaderIds(shaderSources.size());
+		DN_CORE_ASSERT(shaderSources.size() <= 2, "Only 2 shaders supported for now.");
+		std::array<GLenum, 2> glShaderIds;
+		int i = 0;
 		for (auto& [type, source] : shaderSources)
 		{
 			GLuint shader = glCreateShader(type);
@@ -109,7 +123,7 @@ namespace Dolan {
 			}
 
 			glAttachShader(program, shader);
-			glShaderIds.push_back(shader);
+			glShaderIds[i++] = shader;
 		}
 
 		glLinkProgram(program);

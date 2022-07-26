@@ -12,11 +12,13 @@ namespace Dolan {
 	{
 	public:
 		OpenGlShader(const std::string& filepath);
-		OpenGlShader(const std::string& vertSrc, const std::string& fragSrc);
+		OpenGlShader(const std::string& name, const std::string& vertSrc, const std::string& fragSrc);
 		virtual ~OpenGlShader();
 
 		virtual void Bind() const override;
 		virtual void UnBind() const override;
+
+		virtual const std::string& GetName() const override { return m_Name; }
 
 		void UploadUniformInt(const std::string& name, int value);
 
@@ -32,6 +34,7 @@ namespace Dolan {
 		void Compile(const std::unordered_map<GLenum, std::string>& shaderSources);
 	private:
 		uint32_t m_RendererId;
+		std::string m_Name;
 	};
 
 }

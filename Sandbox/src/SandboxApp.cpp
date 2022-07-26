@@ -93,7 +93,7 @@ public:
 			}
 		)";
 
-		m_Shader.reset(Dolan::Shader::Create(vertexSrc, fragmentSrc));
+		m_Shader = Dolan::Shader::Create("VertexPosColor", vertexSrc, fragmentSrc);
 
 		std::string flatColorShaderVertSrc = R"(
 			#version 330 core
@@ -126,15 +126,15 @@ public:
 				color = vec4(u_Color, 1.0);
 			}
 		)";
-		m_FlatColorShader.reset(Dolan::Shader::Create(flatColorShaderVertSrc, flatColorShaderFragSrc));
+		m_FlatColorShader = Dolan::Shader::Create("FlatColor", flatColorShaderVertSrc, flatColorShaderFragSrc);
 
-		m_TextureShader.reset(Dolan::Shader::Create("assets/shaders/Texture.glsl"));
+		Dolan::Ref<Dolan::Shader> textureShader = m_ShaderLibrary.Load("assets/shaders/Texture.glsl");
 
 		m_Texture = Dolan::Texture2d::Create("assets/textures/Checkerboard.png");
 		m_ChernoLogoTexture = Dolan::Texture2d::Create("assets/textures/ChernoLogo.png");
 
-		std::dynamic_pointer_cast<Dolan::OpenGlShader>(m_TextureShader)->Bind();
-		std::dynamic_pointer_cast<Dolan::OpenGlShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
+		std::dynamic_pointer_cast<Dolan::OpenGlShader>(textureShader)->Bind();
+		std::dynamic_pointer_cast<Dolan::OpenGlShader>(textureShader)->UploadUniformInt("u_Texture", 0);
 
 	}
 
@@ -178,11 +178,13 @@ public:
 			}
 		}
 
+		auto textureShader = m_ShaderLibrary.Get("Texture");
+
 		m_Texture->Bind();
-		Dolan::Renderer::Submit(m_TextureShader, m_SquareVa, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+		Dolan::Renderer::Submit(textureShader, m_SquareVa, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 		
 		m_ChernoLogoTexture->Bind();
-		Dolan::Renderer::Submit(m_TextureShader, m_SquareVa,glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+		Dolan::Renderer::Submit(textureShader, m_SquareVa,glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 
 		Dolan::Renderer::EndScene();
 	}
@@ -200,10 +202,11 @@ public:
 	}
 
 private:
+	Dolan::ShaderLibrary m_ShaderLibrary;
 	Dolan::Ref<Dolan::Shader> m_Shader;
 	Dolan::Ref<Dolan::VertexArray> m_VertexArray;
 
-	Dolan::Ref<Dolan::Shader> m_FlatColorShader, m_TextureShader;
+	Dolan::Ref<Dolan::Shader> m_FlatColorShader;
 	Dolan::Ref<Dolan::VertexArray> m_SquareVa;
 
 	Dolan::Ref<Dolan::Texture2d> m_Texture, m_ChernoLogoTexture;
