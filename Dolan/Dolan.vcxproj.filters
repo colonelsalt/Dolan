@@ -102,6 +102,9 @@
     <ClInclude Include="src\Dolan\MouseButtonCodes.h">
       <Filter>src\Dolan</Filter>
     </ClInclude>
+    <ClInclude Include="src\Dolan\OrthoCamController.h">
+      <Filter>src\Dolan</Filter>
+    </ClInclude>
     <ClInclude Include="src\Dolan\Renderer\Buffer.h">
       <Filter>src\Dolan\Renderer</Filter>
     </ClInclude>
@@ -1407,7 +1410,6 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\Dolan\OrthoCamController.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Dolan\Application.cpp">
@@ -1426,6 +1428,9 @@
       <Filter>src\Dolan</Filter>
     </ClCompile>
     <ClCompile Include="src\Dolan\Log.cpp">
+      <Filter>src\Dolan</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Dolan\OrthoCamController.cpp">
       <Filter>src\Dolan</Filter>
     </ClCompile>
     <ClCompile Include="src\Dolan\Renderer\Buffer.cpp">
@@ -1482,6 +1487,5 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\Dolan\OrthoCamController.cpp" />
   </ItemGroup>
 </Project>

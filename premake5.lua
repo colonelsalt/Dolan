@@ -9,6 +9,11 @@ workspace "Dolan"
 		"Dist"
 	}
 
+	flags
+	{
+		"MultiProcessorCompile"
+	}
+
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 -- Include directories relative to root folder (solution directory)
@@ -19,9 +24,12 @@ IncludeDir["ImGui"] = "Dolan/vendor/imgui"
 IncludeDir["glm"] = "Dolan/vendor/glm"
 IncludeDir["stb_image"] = "Dolan/vendor/stb_image"
 
-include "Dolan/vendor/GLFW"
-include "Dolan/vendor/Glad"
-include "Dolan/vendor/imgui"
+group "Dependencies"
+	include "Dolan/vendor/GLFW"
+	include "Dolan/vendor/Glad"
+	include "Dolan/vendor/imgui"
+
+group ""
 
 project "Dolan"
 	location "Dolan"

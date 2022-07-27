@@ -18,10 +18,6 @@ namespace Dolan {
 	{
 	}
 
-	ImGuiLayer::~ImGuiLayer()
-	{
-	}
-
 	void ImGuiLayer::OnAttach()
 	{
 		IMGUI_CHECKVERSION();
