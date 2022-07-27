@@ -156,6 +156,7 @@
     <ClInclude Include="src\Dolan\LayerStack.h" />
     <ClInclude Include="src\Dolan\Log.h" />
     <ClInclude Include="src\Dolan\MouseButtonCodes.h" />
+    <ClInclude Include="src\Dolan\OrthoCamController.h" />
     <ClInclude Include="src\Dolan\Renderer\Buffer.h" />
     <ClInclude Include="src\Dolan\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\Dolan\Renderer\OrthographicCamera.h" />
@@ -599,6 +600,7 @@
     <ClCompile Include="src\Dolan\Layer.cpp" />
     <ClCompile Include="src\Dolan\LayerStack.cpp" />
     <ClCompile Include="src\Dolan\Log.cpp" />
+    <ClCompile Include="src\Dolan\OrthoCamController.cpp" />
     <ClCompile Include="src\Dolan\Renderer\Buffer.cpp" />
     <ClCompile Include="src\Dolan\Renderer\OrthographicCamera.cpp" />
     <ClCompile Include="src\Dolan\Renderer\RenderCommand.cpp" />

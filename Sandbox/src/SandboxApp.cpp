@@ -11,7 +11,7 @@ class ExampleLayer : public Dolan::Layer
 {
 public:
 	ExampleLayer()
-		: Dolan::Layer("ExampleLayer"), m_Camera(-1.6f, 1.6f, -0.9f, 0.9f), m_CameraPos(0.0f)
+		: Dolan::Layer("ExampleLayer"), m_CameraController(1280.0f / 720.0f)
 	{
 		m_VertexArray.reset(Dolan::VertexArray::Create());
 
@@ -140,28 +140,12 @@ public:
 
 	void OnUpdate(Dolan::Timestep ts) override
 	{
-		if (Dolan::Input::IsKeyPressed(DN_KEY_LEFT))
-			m_CameraPos.x -= m_CameraMoveSpeed * ts;
-		else if (Dolan::Input::IsKeyPressed(DN_KEY_RIGHT))
-			m_CameraPos.x += m_CameraMoveSpeed * ts;
-		
-		if (Dolan::Input::IsKeyPressed(DN_KEY_UP))
-			m_CameraPos.y += m_CameraMoveSpeed * ts;
-		else if (Dolan::Input::IsKeyPressed(DN_KEY_DOWN))
-			m_CameraPos.y -= m_CameraMoveSpeed * ts;
-
-		if (Dolan::Input::IsKeyPressed(DN_KEY_A))
-			m_CameraRot += m_CameraRotSpeed * ts;
-		if (Dolan::Input::IsKeyPressed(DN_KEY_D))
-			m_CameraRot -= m_CameraRotSpeed * ts;
+		m_CameraController.OnUpdate(ts);
 
 		Dolan::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		Dolan::RenderCommand::Clear();
 
-		m_Camera.SetPosition(m_CameraPos);
-		m_Camera.SetRotation(m_CameraRot);
-
-		Dolan::Renderer::BeginScene(m_Camera);
+		Dolan::Renderer::BeginScene(m_CameraController.GetCamera());
 		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f, 0.1f, 0.1f));
 
 		std::dynamic_pointer_cast<Dolan::OpenGlShader>(m_FlatColorShader)->Bind();
@@ -198,7 +182,7 @@ public:
 
 	void OnEvent(Dolan::Event& e) override
 	{
-
+		m_CameraController.OnEvent(e);
 	}
 
 private:
@@ -211,12 +195,7 @@ private:
 
 	Dolan::Ref<Dolan::Texture2d> m_Texture, m_ChernoLogoTexture;
 
-	Dolan::OrthographicCamera m_Camera;
-	glm::vec3 m_CameraPos;
-	float m_CameraRot = 0.0f;
-	float m_CameraRotSpeed = 180.0f;
-	float m_CameraMoveSpeed = 5.0f;
-
+	Dolan::OrthoCamController m_CameraController;
 	glm::vec3 m_SquareColor = { 0.2f, 0.3f, 0.8f };
 };
 

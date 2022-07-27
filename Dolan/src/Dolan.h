@@ -9,6 +9,7 @@
 #include "Dolan/Input.h"
 #include "Dolan/KeyCodes.h"
 #include "Dolan/MouseButtonCodes.h"
+#include "Dolan/OrthoCamController.h"
 
 #include "Dolan/ImGui/ImGuiLayer.h"
 
