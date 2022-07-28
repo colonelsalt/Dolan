@@ -32,7 +32,7 @@ namespace Dolan {
 			s_RendererApi->DrawIndexed(vertexArray);
 		}
 	private:
-		static RendererApi* s_RendererApi;
+		static Scope<RendererApi> s_RendererApi;
 	};
 
 }

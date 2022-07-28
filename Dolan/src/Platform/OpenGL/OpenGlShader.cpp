@@ -149,7 +149,10 @@ namespace Dolan {
 		}
 
 		for (GLenum id : glShaderIds)
+		{
 			glDetachShader(program, id);
+			glDeleteShader(id);
+		}
 
 		m_RendererId = program;
 	}

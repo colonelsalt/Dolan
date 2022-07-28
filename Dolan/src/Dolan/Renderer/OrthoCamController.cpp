@@ -16,14 +16,26 @@ namespace Dolan {
 	void OrthoCamController::OnUpdate(Timestep ts)
 	{
 		if (Input::IsKeyPressed(DN_KEY_A))
-			m_CameraPos.x -= m_CameraTranslateSpeed * ts;
+		{
+			m_CameraPos.x -= cos(glm::radians(m_CameraRot)) * m_CameraTranslateSpeed * ts;
+			m_CameraPos.y -= sin(glm::radians(m_CameraRot)) * m_CameraTranslateSpeed * ts;
+		}
 		else if (Input::IsKeyPressed(DN_KEY_D))
-			m_CameraPos.x += m_CameraTranslateSpeed * ts;
+		{
+			m_CameraPos.x += cos(glm::radians(m_CameraRot)) * m_CameraTranslateSpeed * ts;
+			m_CameraPos.y += sin(glm::radians(m_CameraRot)) * m_CameraTranslateSpeed * ts;
+		}
 
 		if (Input::IsKeyPressed(DN_KEY_W))
-			m_CameraPos.y += m_CameraTranslateSpeed * ts;
+		{
+			m_CameraPos.x += -sin(glm::radians(m_CameraRot)) * m_CameraTranslateSpeed * ts;
+			m_CameraPos.y += cos(glm::radians(m_CameraRot)) * m_CameraTranslateSpeed * ts;
+		}
 		else if (Input::IsKeyPressed(DN_KEY_S))
-			m_CameraPos.y -= m_CameraTranslateSpeed * ts;
+		{
+			m_CameraPos.x -= -sin(glm::radians(m_CameraRot)) * m_CameraTranslateSpeed * ts;
+			m_CameraPos.y -= cos(glm::radians(m_CameraRot)) * m_CameraTranslateSpeed * ts;
+		}
 
 		if (m_RotationEnabled)
 		{
@@ -32,6 +44,11 @@ namespace Dolan {
 			if (Input::IsKeyPressed(DN_KEY_E))
 				m_CameraRot -= m_CameraRotSpeed * ts;
 			
+			if (m_CameraRot > 180.0f)
+				m_CameraRot -= 360.0f;
+			else if (m_CameraRot <= -180.0f)
+				m_CameraRot += 360.0f;
+
 			m_Camera.SetRotation(m_CameraRot);
 		}
 

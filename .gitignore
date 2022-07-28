@@ -1,12 +1,13 @@
 # Directories
 .vs/
-/bin/
+**/bin/
+!vendor/bin/premake/
 bin-int/
 
 # Files
-*.user
-*.bak
-*.ini
-*.sln
-*.vcxproj
-*.vcxproj.filters
+**.bak
+**.ini
+**.sln
+**.vcxproj
+**.vcxproj.filters
+**.vcxproj.user
