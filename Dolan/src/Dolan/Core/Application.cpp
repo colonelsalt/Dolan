@@ -1,10 +1,10 @@
 #include "dnpch.h"
 #include "Application.h"
 
-#include "Dolan/Log.h"
+#include "Dolan/Core/Log.h"
 #include "Input.h"
 
-#include "Renderer/Renderer.h"
+#include "Dolan/Renderer/Renderer.h"
 
 #include <GLFW/glfw3.h>
 

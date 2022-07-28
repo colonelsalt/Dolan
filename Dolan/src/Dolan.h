@@ -1,15 +1,15 @@
 #pragma once
 
-#include "Dolan/Application.h"
-#include "Dolan/Layer.h"
-#include "Dolan/Log.h"
+#include "Dolan/Core/Application.h"
+#include "Dolan/Core/Layer.h"
+#include "Dolan/Core/Log.h"
 
 #include "Dolan/Core/Timestep.h"
 
-#include "Dolan/Input.h"
-#include "Dolan/KeyCodes.h"
-#include "Dolan/MouseButtonCodes.h"
-#include "Dolan/OrthoCamController.h"
+#include "Dolan/Core/Input.h"
+#include "Dolan/Core/KeyCodes.h"
+#include "Dolan/Core/MouseButtonCodes.h"
+#include "Dolan/Renderer/OrthoCamController.h"
 
 #include "Dolan/ImGui/ImGuiLayer.h"
 
@@ -23,4 +23,4 @@
 
 #include "Dolan/Renderer/OrthographicCamera.h"
 
-#include "Dolan/EntryPoint.h"
+#include "Dolan/Core/EntryPoint.h"

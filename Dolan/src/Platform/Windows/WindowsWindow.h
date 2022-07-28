@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Dolan/Window.h"
+#include "Dolan/Core/Window.h"
 #include "Dolan/Renderer/GraphicsContext.h"
 
 #include <GLFW/glfw3.h>

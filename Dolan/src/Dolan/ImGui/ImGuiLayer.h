@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Dolan/Layer.h"
+#include "Dolan/Core/Layer.h"
 
 #include "Dolan/Events/ApplicationEvent.h"
 #include "Dolan/Events/KeyEvent.h"

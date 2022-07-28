@@ -2,7 +2,7 @@
 
 #include "dnpch.h"
 
-#include "Dolan/Core.h"
+#include "Dolan/Core/Core.h"
 #include "Dolan/Events/Event.h"
 
 namespace Dolan {

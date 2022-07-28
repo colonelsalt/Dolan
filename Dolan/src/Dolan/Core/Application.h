@@ -2,9 +2,9 @@
 
 #include "Core.h"
 #include "Window.h"
-#include "Dolan/LayerStack.h"
-#include "Events/Event.h"
-#include "Events/ApplicationEvent.h"
+#include "Dolan/Core/LayerStack.h"
+#include "Dolan/Events/Event.h"
+#include "Dolan/Events/ApplicationEvent.h"
 
 #include "Dolan/Core/Timestep.h"
 

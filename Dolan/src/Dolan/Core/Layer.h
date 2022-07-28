@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Dolan/Core.h"
+#include "Dolan/Core/Core.h"
 #include "Dolan/Events/Event.h"
 #include "Dolan/Core/Timestep.h"
 

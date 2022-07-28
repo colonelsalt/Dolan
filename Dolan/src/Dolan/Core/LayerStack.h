@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Dolan/Core.h"
+#include "Dolan/Core/Core.h"
 #include "Layer.h"
 
 #include "dnpch.h"

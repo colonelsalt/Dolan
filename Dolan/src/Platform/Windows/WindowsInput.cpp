@@ -2,7 +2,7 @@
 #include "WindowsInput.h"
 
 #include <GLFW/glfw3.h>
-#include "Dolan/Application.h"
+#include "Dolan/Core/Application.h"
 
 namespace Dolan {
 	

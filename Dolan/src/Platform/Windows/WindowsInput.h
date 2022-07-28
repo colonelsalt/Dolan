@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Dolan/Input.h"
+#include "Dolan/Core/Input.h"
 
 namespace Dolan {
 	class WindowsInput : public Input

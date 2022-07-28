@@ -1,8 +1,8 @@
 #include "dnpch.h"
 #include "OrthoCamController.h"
 
-#include "Dolan/KeyCodes.h"
-#include "Dolan/Input.h"
+#include "Dolan/Core/KeyCodes.h"
+#include "Dolan/Core/Input.h"
 
 namespace Dolan {
 

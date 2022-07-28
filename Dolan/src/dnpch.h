@@ -13,7 +13,7 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#include "Dolan/Log.h"
+#include "Dolan/Core/Log.h"
 
 #ifdef DN_PLATFORM_WINDOWS
 	#include <Windows.h>
