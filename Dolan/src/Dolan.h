@@ -14,6 +14,7 @@
 #include "Dolan/ImGui/ImGuiLayer.h"
 
 #include "Dolan/Renderer/Renderer.h"
+#include "Dolan/Renderer/Renderer2d.h"
 #include "Dolan/Renderer/RenderCommand.h"
 
 #include "Dolan/Renderer/Buffer.h"
