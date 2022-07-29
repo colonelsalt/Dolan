@@ -1,4 +1,5 @@
 #include <Dolan.h>
+#include <Dolan/Core/EntryPoint.h>
 
 #include "Platform/OpenGL/OpenGlShader.h"
 
@@ -7,13 +8,15 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "Sandbox2d.h"
+
 class ExampleLayer : public Dolan::Layer
 {
 public:
 	ExampleLayer()
 		: Dolan::Layer("ExampleLayer"), m_CameraController(1280.0f / 720.0f)
 	{
-		m_VertexArray.reset(Dolan::VertexArray::Create());
+		m_VertexArray = Dolan::VertexArray::Create();
 
 		float vertices[7 * 3] = {
 			-0.5f, -0.5f, 0.0f,		0.8f, 0.2f, 0.8f, 1.0f,
@@ -36,7 +39,7 @@ public:
 		indexBuffer.reset(Dolan::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
-		m_SquareVa.reset(Dolan::VertexArray::Create());
+		m_SquareVa = Dolan::VertexArray::Create();
 
 		float squareVertices[5 * 4] = {
 			-0.5f, -0.5f, 0.0f,		0.0f, 0.0f,
@@ -204,7 +207,8 @@ class Sandbox : public Dolan::Application
 public:
 	Sandbox()
 	{
-		PushLayer(new ExampleLayer());
+		// PushLayer(new ExampleLayer());
+		PushLayer(new Sandbox2d());
 	}
 
 	~Sandbox()

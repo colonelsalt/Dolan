@@ -22,5 +22,3 @@
 #include "Dolan/Renderer/VertexArray.h"
 
 #include "Dolan/Renderer/OrthographicCamera.h"
-
-#include "Dolan/Core/EntryPoint.h"

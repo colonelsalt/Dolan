@@ -6,7 +6,7 @@
 
 namespace Dolan {
 
-	VertexArray* VertexArray::Create()
+	Ref<VertexArray> VertexArray::Create()
 	{
 		switch (Renderer::GetApi())
 		{
@@ -14,7 +14,7 @@ namespace Dolan {
 				DN_CORE_ASSERT(false, "Unknown renderer API.");
 				return nullptr;
 			case RendererApi::Api::OpenGL:
-				return new OpenGlVertexArray();
+				return std::make_shared<OpenGlVertexArray>();
 		}
 
 		DN_CORE_ASSERT(false, "Unknown renderer API.");
