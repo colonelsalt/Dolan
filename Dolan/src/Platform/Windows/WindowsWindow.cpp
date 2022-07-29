@@ -9,7 +9,7 @@
 
 namespace Dolan {
 
-	static bool s_GlfwInitialised = false;
+	static uint8_t s_GlfwWindowCount = 0;
 
 	static void GlfwErrorCallback(int errorCode, const char* description)
 	{
@@ -39,17 +39,16 @@ namespace Dolan {
 
 		DN_CORE_INFO("Creating window '{0}' ({1}, {2})", props.Title, props.Width, props.Height);
 
-
-		if (!s_GlfwInitialised)
+		if (s_GlfwWindowCount == 0)
 		{
 			int success = glfwInit();
 			DN_CORE_ASSERT(success, "Failed to initialise GLFW!");
 			glfwSetErrorCallback(GlfwErrorCallback);
-			s_GlfwInitialised = true;
 		}
 
 		m_Window = glfwCreateWindow((int)m_Data.Width, (int)m_Data.Height, m_Data.Title.c_str(), nullptr, nullptr);
-		
+		s_GlfwWindowCount++;
+
 		m_Context = CreateScope<OpenGlContext>(m_Window);
 		m_Context->Init();
 
@@ -147,6 +146,12 @@ namespace Dolan {
 	void WindowsWindow::Shutdown()
 	{
 		glfwDestroyWindow(m_Window);
+		s_GlfwWindowCount--;
+		if (s_GlfwWindowCount == 0)
+		{
+			DN_CORE_INFO("Terminating GLFW");
+			glfwTerminate();
+		}
 	}
 
 	void WindowsWindow::OnUpdate()
