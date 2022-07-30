@@ -3,9 +3,28 @@
 
 #include "stb_image.h"
 
-#include <glad/glad.h>
-
 namespace Dolan {
+
+	OpenGlTexture2d::OpenGlTexture2d(uint32_t width, uint32_t height)
+		: m_Width(width), m_Height(height)
+	{
+		// Format OpenGl stores the image data in
+		m_InternalFormat = GL_RGBA8;
+		// Format our source image file is in
+		m_DataFormat = GL_RGBA;
+
+		glCreateTextures(GL_TEXTURE_2D, 1, &m_RendererId);
+		// Allocate space on GPU for texture
+		glTextureStorage2D(m_RendererId, 1, m_InternalFormat, m_Width, m_Height);
+
+		// Specify stretching policy to use if geometry is smaller or larger than texture resolution
+		glTextureParameteri(m_RendererId, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTextureParameteri(m_RendererId, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+		glTextureParameteri(m_RendererId, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTextureParameteri(m_RendererId, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+	}
 
 	OpenGlTexture2d::OpenGlTexture2d(const std::string& path)
 		: m_Path(path)
@@ -33,6 +52,9 @@ namespace Dolan {
 			dataFormat = GL_RGB;
 		}
 
+		m_InternalFormat = internalFormat;
+		m_DataFormat = dataFormat;
+
 		DN_CORE_ASSERT(internalFormat & dataFormat, "Image format not supported.");
 
 		glCreateTextures(GL_TEXTURE_2D, 1, &m_RendererId);
@@ -55,6 +77,14 @@ namespace Dolan {
 	OpenGlTexture2d::~OpenGlTexture2d()
 	{
 		glDeleteTextures(1, &m_RendererId);
+	}
+
+	void OpenGlTexture2d::SetData(void* data, uint32_t size)
+	{
+		// Data buffer has to fill entire texture
+		uint32_t bpp = m_DataFormat == GL_RGBA ? 4 : 3;
+		DN_CORE_ASSERT(size == m_Width * m_Height * bpp, "Data must be entire texture.");
+		glTextureSubImage2D(m_RendererId, 0, 0, 0, m_Width, m_Height, m_DataFormat, GL_UNSIGNED_BYTE, data);
 	}
 
 	void OpenGlTexture2d::Bind(uint32_t slot) const
