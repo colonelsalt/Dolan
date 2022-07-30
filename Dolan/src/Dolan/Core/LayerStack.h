@@ -1,16 +1,16 @@
 #pragma once
 
 #include "Dolan/Core/Core.h"
-#include "Layer.h"
+#include "Dolan/Core/Layer.h"
 
 #include "dnpch.h"
 
 namespace Dolan {
 
-	class DOLAN_API LayerStack
+	class LayerStack
 	{
 	public:
-		LayerStack();
+		LayerStack() = default;
 		~LayerStack();
 
 		void PushLayer(Layer* layer);

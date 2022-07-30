@@ -5,7 +5,7 @@
 #include "Dolan/Core/Timestep.h"
 
 namespace Dolan {
-	class DOLAN_API Layer
+	class Layer
 	{
 	public:
 		Layer(const std::string name = "Layer");

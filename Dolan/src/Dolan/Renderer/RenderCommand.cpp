@@ -5,6 +5,6 @@
 
 namespace Dolan {
 
-	Scope<RendererApi> RenderCommand::s_RendererApi = CreateScope<OpenGlRendererApi>();
+	Scope<RendererApi> RenderCommand::s_RendererApi = RendererApi::Create();
 
 }

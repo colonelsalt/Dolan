@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Dolan/Core/Core.h"
+
 #include "Dolan/Core/Application.h"
 #include "Dolan/Core/Layer.h"
 #include "Dolan/Core/Log.h"

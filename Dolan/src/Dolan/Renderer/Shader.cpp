@@ -14,7 +14,7 @@ namespace Dolan {
 			DN_CORE_ASSERT(false, "Unknown renderer API.");
 			return nullptr;
 		case RendererApi::Api::OpenGL:
-			return std::make_shared<OpenGlShader>(filepath);
+			return CreateRef<OpenGlShader>(filepath);
 		}
 
 		DN_CORE_ASSERT(false, "Unknown renderer API.");
@@ -29,7 +29,7 @@ namespace Dolan {
 				DN_CORE_ASSERT(false, "Unknown renderer API.");
 				return nullptr;
 			case RendererApi::Api::OpenGL:
-				return std::make_shared<OpenGlShader>(name, vertSrc, fragSrc);
+				return CreateRef<OpenGlShader>(name, vertSrc, fragSrc);
 		}
 
 		DN_CORE_ASSERT(false, "Unknown renderer API.");

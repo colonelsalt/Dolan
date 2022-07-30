@@ -16,9 +16,9 @@ namespace Dolan {
 		DN_CORE_ERROR("GLFW error ({0}): {1}", errorCode, description);
 	}
 
-	Window* Window::Create(const WindowProps& props)
+	Scope<Window> Window::Create(const WindowProps& props)
 	{
-		return new WindowsWindow(props);
+		return CreateScope<WindowsWindow>(props);
 	}
 
 	WindowsWindow::WindowsWindow(const WindowProps& props)
@@ -49,7 +49,7 @@ namespace Dolan {
 		m_Window = glfwCreateWindow((int)m_Data.Width, (int)m_Data.Height, m_Data.Title.c_str(), nullptr, nullptr);
 		s_GlfwWindowCount++;
 
-		m_Context = CreateScope<OpenGlContext>(m_Window);
+		m_Context = GraphicsContext::Create(m_Window);
 		m_Context->Init();
 
 		glfwSetWindowUserPointer(m_Window, &m_Data);
@@ -149,7 +149,6 @@ namespace Dolan {
 		s_GlfwWindowCount--;
 		if (s_GlfwWindowCount == 0)
 		{
-			DN_CORE_INFO("Terminating GLFW");
 			glfwTerminate();
 		}
 	}

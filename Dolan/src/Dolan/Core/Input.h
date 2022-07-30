@@ -4,7 +4,7 @@
 
 namespace Dolan {
 	
-	class DOLAN_API Input
+	class Input
 	{
 	protected:
 		Input() = default;

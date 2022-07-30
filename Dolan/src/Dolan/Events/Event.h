@@ -30,7 +30,7 @@ namespace Dolan {
 
 #define EVENT_CLASS_CATEGORY(category) virtual int GetCategoryFlags() const override { return category; }
 
-	class DOLAN_API Event
+	class Event
 	{
 		friend class EventDispatcher;
 	public:

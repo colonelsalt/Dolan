@@ -6,7 +6,7 @@
 
 namespace Dolan {
 	
-	VertexBuffer* VertexBuffer::Create(float* vertices, uint32_t size)
+	Ref<VertexBuffer> VertexBuffer::Create(float* vertices, uint32_t size)
 	{
 		switch (Renderer::GetApi())
 		{
@@ -14,14 +14,14 @@ namespace Dolan {
 			DN_CORE_ASSERT(false, "Renderer API 'NONE' is not supported");
 			return nullptr;
 		case RendererApi::Api::OpenGL:
-			return new OpenGlVertexBuffer(vertices, size);
+			return CreateRef<OpenGlVertexBuffer>(vertices, size);
 		}
 
 		DN_CORE_ASSERT(false, "Unknown Renderer API!");
 		return nullptr;
 	}
 
-	IndexBuffer* IndexBuffer::Create(uint32_t* indices, uint32_t count)
+	Ref<IndexBuffer> IndexBuffer::Create(uint32_t* indices, uint32_t count)
 	{
 		switch (Renderer::GetApi())
 		{
@@ -29,7 +29,7 @@ namespace Dolan {
 			DN_CORE_ASSERT(false, "Renderer API 'NONE' is not supported");
 			return nullptr;
 		case RendererApi::Api::OpenGL:
-			return new OpenGlIndexBuffer(indices, count);
+			return CreateRef<OpenGlIndexBuffer>(indices, count);
 		}
 
 		DN_CORE_ASSERT(false, "Unknown Renderer API!");

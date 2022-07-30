@@ -1,9 +1,7 @@
 #include <Dolan.h>
 #include <Dolan/Core/EntryPoint.h>
 
-#include "Platform/OpenGL/OpenGlShader.h"
-
-#include "imgui/imgui.h"
+#include <imgui/imgui.h>
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -24,8 +22,7 @@ public:
 			 0.0f,  0.5f, 0.0f,		0.8f, 0.8f, 0.2f, 1.0f
 		};
 
-		Dolan::Ref<Dolan::VertexBuffer> vertexBuffer;
-		vertexBuffer.reset(Dolan::VertexBuffer::Create(vertices, sizeof(vertices)));
+		Dolan::Ref<Dolan::VertexBuffer> vertexBuffer = Dolan::VertexBuffer::Create(vertices, sizeof(vertices));
 		Dolan::BufferLayout layout = {
 			{ Dolan::ShaderDataType::Float3, "a_Position" },
 			{ Dolan::ShaderDataType::Float4, "a_Color" }
@@ -35,8 +32,7 @@ public:
 		m_VertexArray->AddVertexBuffer(vertexBuffer);
 
 		uint32_t indices[3] = { 0, 1, 2 };
-		Dolan::Ref<Dolan::IndexBuffer> indexBuffer;
-		indexBuffer.reset(Dolan::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
+		Dolan::Ref<Dolan::IndexBuffer> indexBuffer = Dolan::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t));
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
 		m_SquareVa = Dolan::VertexArray::Create();
@@ -48,8 +44,7 @@ public:
 			-0.5f,  0.5f, 0.0f,		0.0f, 1.0f
 		};
 
-		Dolan::Ref<Dolan::VertexBuffer> squareVb;
-		squareVb.reset(Dolan::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
+		Dolan::Ref<Dolan::VertexBuffer> squareVb = Dolan::VertexBuffer::Create(squareVertices, sizeof(squareVertices));
 		squareVb->SetLayout({
 			{ Dolan::ShaderDataType::Float3, "a_Position" },
 			{ Dolan::ShaderDataType::Float2, "a_TexCoord" }
@@ -57,8 +52,7 @@ public:
 		m_SquareVa->AddVertexBuffer(squareVb);
 
 		uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
-		Dolan::Ref<Dolan::IndexBuffer> squareIb;
-		squareIb.reset(Dolan::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
+		Dolan::Ref<Dolan::IndexBuffer> squareIb = Dolan::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t));
 		m_SquareVa->SetIndexBuffer(squareIb);
 
 		std::string vertexSrc = R"(
@@ -136,8 +130,8 @@ public:
 		m_Texture = Dolan::Texture2d::Create("assets/textures/Checkerboard.png");
 		m_ChernoLogoTexture = Dolan::Texture2d::Create("assets/textures/ChernoLogo.png");
 
-		std::dynamic_pointer_cast<Dolan::OpenGlShader>(textureShader)->Bind();
-		std::dynamic_pointer_cast<Dolan::OpenGlShader>(textureShader)->UploadUniformInt("u_Texture", 0);
+		textureShader->Bind();
+		textureShader->SetInt("u_Texture", 0);
 
 	}
 
@@ -151,8 +145,8 @@ public:
 		Dolan::Renderer::BeginScene(m_CameraController.GetCamera());
 		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f, 0.1f, 0.1f));
 
-		std::dynamic_pointer_cast<Dolan::OpenGlShader>(m_FlatColorShader)->Bind();
-		std::dynamic_pointer_cast<Dolan::OpenGlShader>(m_FlatColorShader)->UploadUniformFloat3("u_Color", m_SquareColor);
+		m_FlatColorShader->Bind();
+		m_FlatColorShader->SetFloat3("u_Color", m_SquareColor);
 
 		for (int y = 0; y < 20; y++)
 		{

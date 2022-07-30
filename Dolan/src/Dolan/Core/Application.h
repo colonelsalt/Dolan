@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Core.h"
-#include "Window.h"
+#include "Dolan/Core/Core.h"
+#include "Dolan/Core/Window.h"
 #include "Dolan/Core/LayerStack.h"
 #include "Dolan/Events/Event.h"
 #include "Dolan/Events/ApplicationEvent.h"
@@ -15,7 +15,7 @@ namespace Dolan {
 	{
 	public:
 		Application();
-		virtual ~Application() = default;
+		virtual ~Application();
 		
 		void Run();
 		

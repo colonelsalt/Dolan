@@ -31,8 +31,7 @@ namespace Dolan {
 			-0.5f,  0.5f, 0.0f,		0.0f, 1.0f
 		};
 
-		Ref<VertexBuffer> squareVb;
-		squareVb.reset(VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
+		Ref<VertexBuffer> squareVb = VertexBuffer::Create(squareVertices, sizeof(squareVertices));
 		squareVb->SetLayout({
 			{ ShaderDataType::Float3, "a_Position" },
 			{ ShaderDataType::Float2, "a_TexCoord"}
@@ -40,8 +39,7 @@ namespace Dolan {
 		s_Data->QuadVertexArray->AddVertexBuffer(squareVb);
 
 		uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
-		Ref<IndexBuffer> squareIb;
-		squareIb.reset(IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
+		Ref<IndexBuffer> squareIb = IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t));
 		s_Data->QuadVertexArray->SetIndexBuffer(squareIb);
 
 		s_Data->WhiteTexture = Texture2d::Create(1, 1);

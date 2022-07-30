@@ -21,6 +21,7 @@ namespace Dolan {
 		virtual void DrawIndexed(const Ref<VertexArray>& vertexArray) = 0;
 
 		inline static Api GetApi() { return s_Api; }
+		static Scope<RendererApi> Create();
 	private:
 		static Api s_Api;
 	};

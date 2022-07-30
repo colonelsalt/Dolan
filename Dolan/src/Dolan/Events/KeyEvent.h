@@ -3,7 +3,7 @@
 #include "Event.h"
 
 namespace Dolan {
-	class DOLAN_API KeyEvent : public Event
+	class KeyEvent : public Event
 	{
 	public:
 		inline int GetKeyCode() const { return m_KeyCode; }
@@ -16,7 +16,7 @@ namespace Dolan {
 		int m_KeyCode;
 	};
 
-	class DOLAN_API KeyPressedEvent : public KeyEvent
+	class KeyPressedEvent : public KeyEvent
 	{
 	public:
 		KeyPressedEvent(int keyCode, int repeatCount)
@@ -37,7 +37,7 @@ namespace Dolan {
 		int m_RepeatCount;
 	};
 
-	class DOLAN_API KeyReleasedEvent : public KeyEvent
+	class KeyReleasedEvent : public KeyEvent
 	{
 	public:
 		KeyReleasedEvent(int keyCode)
@@ -53,7 +53,7 @@ namespace Dolan {
 		EVENT_CLASS_TYPE(KeyReleased)
 	};
 
-	class DOLAN_API KeyTypedEvent : public KeyEvent
+	class KeyTypedEvent : public KeyEvent
 	{
 	public:
 		KeyTypedEvent(int keyCode)

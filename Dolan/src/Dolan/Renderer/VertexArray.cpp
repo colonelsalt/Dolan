@@ -14,7 +14,7 @@ namespace Dolan {
 				DN_CORE_ASSERT(false, "Unknown renderer API.");
 				return nullptr;
 			case RendererApi::Api::OpenGL:
-				return std::make_shared<OpenGlVertexArray>();
+				return CreateRef<OpenGlVertexArray>();
 		}
 
 		DN_CORE_ASSERT(false, "Unknown renderer API.");

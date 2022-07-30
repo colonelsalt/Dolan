@@ -1,7 +1,7 @@
 #include "dnpch.h"
 #include "OpenGlTexture.h"
 
-#include "stb_image.h"
+#include <stb_image.h>
 
 namespace Dolan {
 

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Dolan/Core/Core.h"
+
 #ifdef DN_PLATFORM_WINDOWS
 
 extern Dolan::Application* Dolan::CreateApplication();
@@ -17,4 +19,3 @@ int main(int argc, char** argv)
 }
 
 #endif // DN_PLATFORM_WINDOWS
-
