@@ -19,6 +19,7 @@ private:
 	// Temporary
 	Dolan::Ref<Dolan::VertexArray> m_SquareVa;
 	Dolan::Ref<Dolan::Shader> m_FlatColorShader;
+	Dolan::Ref<Dolan::Texture2d> m_CheckerboardTexture;
 
 	glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
 };
