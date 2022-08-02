@@ -1,25 +1,26 @@
 #pragma once
 
 #include "Event.h"
+#include "Dolan/Core/Input.h"
 
 namespace Dolan {
 	class KeyEvent : public Event
 	{
 	public:
-		inline int GetKeyCode() const { return m_KeyCode; }
+		inline KeyCode GetKeyCode() const { return m_KeyCode; }
 
 		EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput)
 	protected:
-		KeyEvent(int keycode)
+		KeyEvent(KeyCode keycode)
 			: m_KeyCode(keycode) {}
 
-		int m_KeyCode;
+		KeyCode m_KeyCode;
 	};
 
 	class KeyPressedEvent : public KeyEvent
 	{
 	public:
-		KeyPressedEvent(int keyCode, int repeatCount)
+		KeyPressedEvent(KeyCode keyCode, int repeatCount)
 			: KeyEvent(keyCode), m_RepeatCount(repeatCount) {}
 
 		inline int GetRepeatCount() const { return m_RepeatCount; }
@@ -40,7 +41,7 @@ namespace Dolan {
 	class KeyReleasedEvent : public KeyEvent
 	{
 	public:
-		KeyReleasedEvent(int keyCode)
+		KeyReleasedEvent(KeyCode keyCode)
 			: KeyEvent(keyCode) {}
 
 		std::string ToString() const override
@@ -56,7 +57,7 @@ namespace Dolan {
 	class KeyTypedEvent : public KeyEvent
 	{
 	public:
-		KeyTypedEvent(int keyCode)
+		KeyTypedEvent(KeyCode keyCode)
 			: KeyEvent(keyCode) {}
 
 		std::string ToString() const override

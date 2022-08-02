@@ -10,7 +10,7 @@
 
 #include "Dolan/Core/Input.h"
 #include "Dolan/Core/KeyCodes.h"
-#include "Dolan/Core/MouseButtonCodes.h"
+#include "Dolan/Core/MouseCodes.h"
 #include "Dolan/Renderer/OrthoCamController.h"
 
 #include "Dolan/ImGui/ImGuiLayer.h"
