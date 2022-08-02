@@ -20,6 +20,8 @@ namespace Dolan {
 
 	OpenGlShader::OpenGlShader(const std::string& filepath)
 	{
+		DN_PROFILE_FUNCTION();
+
 		std::string rawSource = ReadFile(filepath);
 		auto shaderSources = PreProcess(rawSource);
 
@@ -40,6 +42,8 @@ namespace Dolan {
 	OpenGlShader::OpenGlShader(const std::string& name, const std::string& vertSrc, const std::string& fragSrc)
 		: m_Name(name)
 	{
+		DN_PROFILE_FUNCTION();
+
 		std::unordered_map<GLenum, std::string> sources;
 		sources[GL_VERTEX_SHADER] = vertSrc;
 		sources[GL_FRAGMENT_SHADER] = fragSrc;
@@ -49,6 +53,8 @@ namespace Dolan {
 
 	std::string OpenGlShader::ReadFile(const std::string& filepath)
 	{
+		DN_PROFILE_FUNCTION();
+
 		std::string result;
 		std::ifstream in(filepath, std::ios::in | std::ios::binary);
 		if (in)
@@ -69,6 +75,8 @@ namespace Dolan {
 
 	std::unordered_map<GLenum, std::string> OpenGlShader::PreProcess(const std::string& source)
 	{
+		DN_PROFILE_FUNCTION();
+
 		std::unordered_map<GLenum, std::string> shaderSources;
 
 		const char* typeToken = "#type";
@@ -93,6 +101,8 @@ namespace Dolan {
 
 	void OpenGlShader::Compile(const std::unordered_map<GLenum, std::string>& shaderSources)
 	{
+		DN_PROFILE_FUNCTION();
+
 		GLuint program = glCreateProgram();
 		DN_CORE_ASSERT(shaderSources.size() <= 2, "Only 2 shaders supported for now.");
 		std::array<GLenum, 2> glShaderIds;
@@ -159,21 +169,29 @@ namespace Dolan {
 
 	OpenGlShader::~OpenGlShader()
 	{
+		DN_PROFILE_FUNCTION();
+
 		glDeleteProgram(m_RendererId);
 	}
 
 	void OpenGlShader::Bind() const
 	{
+		DN_PROFILE_FUNCTION();
+
 		glUseProgram(m_RendererId);
 	}
 
 	void OpenGlShader::UnBind() const
 	{
+		DN_PROFILE_FUNCTION();
+
 		glUseProgram(0);
 	}
 
 	void OpenGlShader::SetInt(const std::string& name, int value)
 	{
+		DN_PROFILE_FUNCTION();
+
 		UploadUniformInt(name, value);
 	}
 

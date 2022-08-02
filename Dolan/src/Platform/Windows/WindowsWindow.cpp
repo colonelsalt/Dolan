@@ -23,16 +23,20 @@ namespace Dolan {
 
 	WindowsWindow::WindowsWindow(const WindowProps& props)
 	{
+		DN_PROFILE_FUNCTION();
 		Init(props);
 	}
 
 	WindowsWindow::~WindowsWindow()
 	{
+		DN_PROFILE_FUNCTION();
 		Shutdown();
 	}
 
 	void WindowsWindow::Init(const WindowProps& props)
 	{
+		DN_PROFILE_FUNCTION();
+
 		m_Data.Title = props.Title;
 		m_Data.Width = props.Width;
 		m_Data.Height = props.Height;
@@ -145,6 +149,8 @@ namespace Dolan {
 
 	void WindowsWindow::Shutdown()
 	{
+		DN_PROFILE_FUNCTION();
+
 		glfwDestroyWindow(m_Window);
 		s_GlfwWindowCount--;
 		if (s_GlfwWindowCount == 0)
@@ -155,12 +161,16 @@ namespace Dolan {
 
 	void WindowsWindow::OnUpdate()
 	{
+		DN_PROFILE_FUNCTION();
+
 		glfwPollEvents();
 		m_Context->SwapBuffers();
 	}
 
 	void WindowsWindow::SetVSync(bool enabled)
 	{
+		DN_PROFILE_FUNCTION();
+
 		if (enabled)
 			glfwSwapInterval(1);
 		else

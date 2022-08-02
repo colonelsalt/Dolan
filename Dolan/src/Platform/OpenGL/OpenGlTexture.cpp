@@ -8,6 +8,8 @@ namespace Dolan {
 	OpenGlTexture2d::OpenGlTexture2d(uint32_t width, uint32_t height)
 		: m_Width(width), m_Height(height)
 	{
+		DN_PROFILE_FUNCTION();
+
 		// Format OpenGl stores the image data in
 		m_InternalFormat = GL_RGBA8;
 		// Format our source image file is in
@@ -29,6 +31,8 @@ namespace Dolan {
 	OpenGlTexture2d::OpenGlTexture2d(const std::string& path)
 		: m_Path(path)
 	{
+		DN_PROFILE_FUNCTION();
+
 		int width, height, channels;
 		stbi_set_flip_vertically_on_load(1);
 		stbi_uc* data = stbi_load(path.c_str(), &width, &height, &channels, 0);
@@ -76,11 +80,15 @@ namespace Dolan {
 
 	OpenGlTexture2d::~OpenGlTexture2d()
 	{
+		DN_PROFILE_FUNCTION();
+
 		glDeleteTextures(1, &m_RendererId);
 	}
 
 	void OpenGlTexture2d::SetData(void* data, uint32_t size)
 	{
+		DN_PROFILE_FUNCTION();
+
 		// Data buffer has to fill entire texture
 		uint32_t bpp = m_DataFormat == GL_RGBA ? 4 : 3;
 		DN_CORE_ASSERT(size == m_Width * m_Height * bpp, "Data must be entire texture.");
@@ -89,6 +97,8 @@ namespace Dolan {
 
 	void OpenGlTexture2d::Bind(uint32_t slot) const
 	{
+		DN_PROFILE_FUNCTION();
+
 		glBindTextureUnit(slot, m_RendererId);
 	}
 

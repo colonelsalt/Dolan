@@ -14,6 +14,8 @@ namespace Dolan {
 
 	void OpenGlContext::Init()
 	{
+		DN_PROFILE_FUNCTION();
+
 		glfwMakeContextCurrent(m_WindowHandle);
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		DN_CORE_ASSERT(status, "Failed to initialise Glad");
@@ -26,6 +28,8 @@ namespace Dolan {
 
 	void OpenGlContext::SwapBuffers()
 	{
+		DN_PROFILE_FUNCTION();
+
 		glfwSwapBuffers(m_WindowHandle);
 	}
 }

@@ -27,26 +27,32 @@ namespace Dolan {
 
 	OpenGlVertexArray::OpenGlVertexArray()
 	{
+		DN_PROFILE_FUNCTION();
 		glCreateVertexArrays(1, &m_RendererId);
 	}
 
 	OpenGlVertexArray::~OpenGlVertexArray()
 	{
+		DN_PROFILE_FUNCTION();
 		glDeleteVertexArrays(1, &m_RendererId);
 	}
 
 	void OpenGlVertexArray::Bind() const
 	{
+		DN_PROFILE_FUNCTION();
 		glBindVertexArray(m_RendererId);
 	}
 
 	void OpenGlVertexArray::Unbind() const
 	{
+		DN_PROFILE_FUNCTION();
 		glBindVertexArray(0);
 	}
 
 	void OpenGlVertexArray::AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer)
 	{
+		DN_PROFILE_FUNCTION();
+
 		DN_CORE_ASSERT(vertexBuffer->GetLayout().GetElements().size(), "Vertex buffer has no layout.");
 
 		glBindVertexArray(m_RendererId);
@@ -70,6 +76,8 @@ namespace Dolan {
 
 	void OpenGlVertexArray::SetIndexBuffer(const Ref<IndexBuffer>& indexBuffer)
 	{
+		DN_PROFILE_FUNCTION();
+
 		glBindVertexArray(m_RendererId);
 		indexBuffer->Bind();
 

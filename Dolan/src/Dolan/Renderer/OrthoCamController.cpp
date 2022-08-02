@@ -15,6 +15,8 @@ namespace Dolan {
 
 	void OrthoCamController::OnUpdate(Timestep ts)
 	{
+		DN_PROFILE_FUNCTION();
+
 		if (Input::IsKeyPressed(DN_KEY_A))
 		{
 			m_CameraPos.x -= cos(glm::radians(m_CameraRot)) * m_CameraTranslateSpeed * ts;
@@ -59,6 +61,8 @@ namespace Dolan {
 
 	void OrthoCamController::OnEvent(Event& e)
 	{
+		DN_PROFILE_FUNCTION();
+
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<MouseScrolledEvent>(DN_BIND_EVENT_FN(OrthoCamController::OnMouseScrolled));
 		dispatcher.Dispatch<WindowResizeEvent>(DN_BIND_EVENT_FN(OrthoCamController::OnWindowResized));
@@ -66,6 +70,8 @@ namespace Dolan {
 
 	bool OrthoCamController::OnMouseScrolled(MouseScrolledEvent& e)
 	{
+		DN_PROFILE_FUNCTION();
+
 		m_ZoomLevel -= e.GetYOffset() * 0.25f;
 		m_ZoomLevel = std::max(m_ZoomLevel, 0.25f);
 		m_Camera.SetProjection(-m_Aspect * m_ZoomLevel, m_Aspect * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
@@ -74,6 +80,8 @@ namespace Dolan {
 
 	bool OrthoCamController::OnWindowResized(WindowResizeEvent& e)
 	{
+		DN_PROFILE_FUNCTION();
+
 		m_Aspect = (float)e.GetWidth() / (float)e.GetHeight();
 		m_Camera.SetProjection(-m_Aspect * m_ZoomLevel, m_Aspect * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
 		return false;

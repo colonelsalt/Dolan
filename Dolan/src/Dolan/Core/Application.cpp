@@ -14,6 +14,8 @@ namespace Dolan {
 
 	Application::Application()
 	{
+		DN_PROFILE_FUNCTION();
+
 		DN_CORE_ASSERT(!s_Instance, "Instance of Application already exists!");
 		s_Instance = this;
 
@@ -28,22 +30,32 @@ namespace Dolan {
 
 	Application::~Application()
 	{
+		DN_PROFILE_FUNCTION();
+
 		Renderer::Shutdown();
 	}
 
 	void Application::PushLayer(Layer* layer)
 	{
+		DN_PROFILE_FUNCTION();
+
 		m_LayerStack.PushLayer(layer);
+		layer->OnAttach();
 	}
 
 	void Application::PushOverlay(Layer* overlay)
 	{
+		DN_PROFILE_FUNCTION();
+
 		m_LayerStack.PushOverlay(overlay);
+		overlay->OnAttach();
 	}
 
 
 	void Application::OnEvent(Event& e)
 	{
+		DN_PROFILE_FUNCTION();
+
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(DN_BIND_EVENT_FN(Application::OnWindowClose));
 		dispatcher.Dispatch<WindowResizeEvent>(DN_BIND_EVENT_FN(Application::OnWindowResize));
@@ -58,6 +70,8 @@ namespace Dolan {
 
 	void Application::Run()
 	{
+		DN_PROFILE_FUNCTION();
+
 		while (m_Running)
 		{
 			float time = (float)glfwGetTime();
@@ -86,6 +100,8 @@ namespace Dolan {
 
 	bool Application::OnWindowResize(WindowResizeEvent& e)
 	{
+		DN_PROFILE_FUNCTION();
+
 		if (e.GetWidth() == 0 || e.GetHeight() == 0)
 		{
 			m_Minimized = true;

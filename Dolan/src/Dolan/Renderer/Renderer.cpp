@@ -10,6 +10,8 @@ namespace Dolan {
 
 	void Renderer::Init()
 	{
+		DN_PROFILE_FUNCTION();
+
 		RenderCommand::Init();
 		Renderer2d::Init();
 	}

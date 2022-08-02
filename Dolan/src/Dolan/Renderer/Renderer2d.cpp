@@ -20,6 +20,8 @@ namespace Dolan {
 
 	void Renderer2d::Init()
 	{
+		DN_PROFILE_FUNCTION();
+
 		s_Data = new Renderer2dStorage();
 
 		s_Data->QuadVertexArray = VertexArray::Create();
@@ -53,17 +55,22 @@ namespace Dolan {
 
 	void Renderer2d::Shutdown()
 	{
+		DN_PROFILE_FUNCTION();
+
 		delete s_Data;
 	}
 
 	void Renderer2d::BeginScene(const OrthographicCamera& camera)
 	{
+		DN_PROFILE_FUNCTION();
+
 		s_Data->TextureShader->Bind();
 		s_Data->TextureShader->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
 	}
 
 	void Renderer2d::EndScene()
 	{
+		DN_PROFILE_FUNCTION();
 	}
 
 	void Renderer2d::DrawQuad(const glm::vec2& position, const glm::vec2& size, const glm::vec4& color)
@@ -73,6 +80,7 @@ namespace Dolan {
 
 	void Renderer2d::DrawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color)
 	{
+		DN_PROFILE_FUNCTION();
 		s_Data->TextureShader->SetFloat4("u_Color", color);
 		s_Data->WhiteTexture->Bind();
 
@@ -91,6 +99,8 @@ namespace Dolan {
 
 	void Renderer2d::DrawQuad(const glm::vec3& position, const glm::vec2& size, const Ref<Texture2d>& texture)
 	{
+		DN_PROFILE_FUNCTION();
+
 		s_Data->TextureShader->SetFloat4("u_Color", glm::vec4(1.0f));
 		texture->Bind();
 
