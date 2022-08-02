@@ -9,13 +9,18 @@ extern Dolan::Application* Dolan::CreateApplication();
 int main(int argc, char** argv)
 {
 	Dolan::Log::Init();
-	DN_CORE_WARN("Log initialised!");
-	int a = 69;
-	DN_INFO("Hello from client; var={0}", a);
-
+	
+	DN_PROFILE_BEGIN_SESSION("Startup", "DolanProfile-Startup.json");
 	Dolan::Application* app= Dolan::CreateApplication();
+	DN_PROFILE_END_SESSION();
+
+	DN_PROFILE_BEGIN_SESSION("Startup", "DolanProfile-Runtime.json");
 	app->Run();
+	DN_PROFILE_END_SESSION();
+
+	DN_PROFILE_BEGIN_SESSION("Startup", "DolanProfile-Shutdown.json");
 	delete app;
+	DN_PROFILE_END_SESSION();
 }
 
 #endif // DN_PLATFORM_WINDOWS

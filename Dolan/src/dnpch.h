@@ -15,6 +15,8 @@
 
 #include "Dolan/Core/Log.h"
 
+#include "Dolan/Debug/Instrumentor.h"
+
 #ifdef DN_PLATFORM_WINDOWS
 	#include <Windows.h>
 #endif
