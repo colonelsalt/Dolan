@@ -195,6 +195,13 @@ namespace Dolan {
 		UploadUniformInt(name, value);
 	}
 
+	void OpenGlShader::SetFloat(const std::string& name, float value)
+	{
+		DN_PROFILE_FUNCTION();
+
+		UploadUniformFloat(name, value);
+	}
+
 	void OpenGlShader::SetFloat3(const std::string& name, const glm::vec3& value)
 	{
 		UploadUniformFloat3(name, value);

@@ -122,7 +122,7 @@ namespace Dolan {
     };
 }
 
-#define DN_PROFILE 1
+#define DN_PROFILE 0
 
 #if DN_PROFILE
     #define DN_PROFILE_BEGIN_SESSION(name, filepath) ::Dolan::Instrumentor::Get().BeginSession(name, filepath)
