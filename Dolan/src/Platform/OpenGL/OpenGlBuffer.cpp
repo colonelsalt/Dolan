@@ -9,6 +9,15 @@ namespace Dolan {
 	// VertexBuffer ------------------------------------------------------------------------------------
 	// ------------------------------------------------------------------------------------------------
 
+	OpenGlVertexBuffer::OpenGlVertexBuffer(uint32_t size)
+	{
+		DN_PROFILE_FUNCTION();
+
+		glCreateBuffers(1, &m_RendererId);
+		glBindBuffer(GL_ARRAY_BUFFER, m_RendererId);
+		glBufferData(GL_ARRAY_BUFFER, size, nullptr, GL_DYNAMIC_DRAW);
+	}
+
 	OpenGlVertexBuffer::OpenGlVertexBuffer(float* vertices, uint32_t size)
 	{
 		DN_PROFILE_FUNCTION();
@@ -37,6 +46,13 @@ namespace Dolan {
 		DN_PROFILE_FUNCTION();
 
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
+	}
+
+	void OpenGlVertexBuffer::SetData(const void* data, uint32_t size)
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, m_RendererId);
+		// Send data from `data` into vertex buffer on GPU
+		glBufferSubData(GL_ARRAY_BUFFER, 0, size, data);
 	}
 
 	// ------------------------------------------------------------------------------------------------

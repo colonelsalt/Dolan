@@ -27,9 +27,9 @@ namespace Dolan {
 			s_RendererApi->Clear();
 		}
 
-		inline static void DrawIndexed(const Ref<VertexArray>& vertexArray)
+		inline static void DrawIndexed(const Ref<VertexArray>& vertexArray, uint32_t indexCount = 0)
 		{
-			s_RendererApi->DrawIndexed(vertexArray);
+			s_RendererApi->DrawIndexed(vertexArray, indexCount);
 		}
 	private:
 		static Scope<RendererApi> s_RendererApi;

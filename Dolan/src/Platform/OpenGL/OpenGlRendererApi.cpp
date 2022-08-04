@@ -30,9 +30,15 @@ namespace Dolan {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
-	void OpenGlRendererApi::DrawIndexed(const Ref<VertexArray>& vertexArray)
+	void OpenGlRendererApi::DrawIndexed(const Ref<VertexArray>& vertexArray, uint32_t indexCount)
 	{
-		glDrawElements(GL_TRIANGLES, vertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+		uint32_t count;
+		if (indexCount == 0)
+			count = vertexArray->GetIndexBuffer()->GetCount();
+		else
+			count = indexCount;
+
+		glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, nullptr);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
