@@ -56,7 +56,8 @@ project "Dolan"
 
 	defines
 	{
-		"_CRT_SECURE_NO_WARNINGS"
+		"_CRT_SECURE_NO_WARNINGS",
+		"GLFW_INCLUDE_NONE"
 	}
 
 	includedirs
@@ -83,9 +84,7 @@ project "Dolan"
 
 		defines
 		{
-			"DN_PLATFORM_WINDOWS",
-			"DN_BUILD_DLL",
-			"GLFW_INCLUDE_NONE"
+			"DN_PLATFORM_WINDOWS"
 		}
 
 	filter "configurations:Debug"

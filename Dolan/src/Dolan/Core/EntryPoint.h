@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Dolan/Core/Core.h"
+#include "Dolan/Core/Base.h"
 
 #ifdef DN_PLATFORM_WINDOWS
 

@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include "Dolan/Core/Core.h"
+#include "Dolan/Core/Base.h"
 
 namespace Dolan {
 
