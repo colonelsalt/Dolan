@@ -195,6 +195,13 @@ namespace Dolan {
 		UploadUniformInt(name, value);
 	}
 
+	void OpenGlShader::SetIntArray(const std::string& name, int* values, uint32_t count)
+	{
+		DN_PROFILE_FUNCTION();
+
+		UploadUniformIntArray(name, values, count);
+	}
+
 	void OpenGlShader::SetFloat(const std::string& name, float value)
 	{
 		DN_PROFILE_FUNCTION();
@@ -221,6 +228,12 @@ namespace Dolan {
 	{
 		GLint location = glGetUniformLocation(m_RendererId, name.c_str());
 		glUniform1i(location, value);
+	}
+
+	void OpenGlShader::UploadUniformIntArray(const std::string& name, int* values, uint32_t count)
+	{
+		GLint location = glGetUniformLocation(m_RendererId, name.c_str());
+		glUniform1iv(location, count, values);
 	}
 
 	void OpenGlShader::UploadUniformFloat(const std::string& name, float value)
