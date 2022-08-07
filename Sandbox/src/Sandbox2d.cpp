@@ -18,6 +18,11 @@ void Sandbox2d::OnAttach()
 	DN_PROFILE_FUNCTION();
 
 	m_CheckerboardTexture = Dolan::Texture2d::Create("assets/textures/Checkerboard.png");
+
+	Dolan::FrameBufferSpec fbSpec;
+	fbSpec.Width = 1280;
+	fbSpec.Height = 720;
+	m_Framebuffer = Dolan::FrameBuffer::Create(fbSpec);
 }
 
 void Sandbox2d::OnDetach()
@@ -32,6 +37,7 @@ void Sandbox2d::OnUpdate(Dolan::Timestep ts)
 
 	Dolan::Renderer2d::ResetStats();
 
+	m_Framebuffer->Bind();
 	Dolan::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 	Dolan::RenderCommand::Clear();
 	
@@ -58,7 +64,7 @@ void Sandbox2d::OnUpdate(Dolan::Timestep ts)
 		}
 	}
 	Dolan::Renderer2d::EndScene();
-
+	m_Framebuffer->Unbind();
 }
 
 void Sandbox2d::OnImGuiRender()
@@ -66,7 +72,7 @@ void Sandbox2d::OnImGuiRender()
 	DN_PROFILE_FUNCTION();
 
 	// Note: Switch this to true to enable dockspace
-	static bool dockingEnabled = false;
+	static bool dockingEnabled = true;
 	if (dockingEnabled)
 	{
 		static bool dockspaceOpen = true;
@@ -139,8 +145,8 @@ void Sandbox2d::OnImGuiRender()
 
 		ImGui::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
 
-		uint32_t textureID = m_CheckerboardTexture->GetRendererId();
-		ImGui::Image((void*)textureID, ImVec2{ 256.0f, 256.0f });
+		uint32_t textureID = m_Framebuffer->GetColorAttachmentRendererId();
+		ImGui::Image((void*)textureID, ImVec2{ 1280.0f, 720.0f });
 		ImGui::End();
 
 		ImGui::End();

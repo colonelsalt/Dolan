@@ -21,6 +21,7 @@
 
 #include "Dolan/Renderer/Buffer.h"
 #include "Dolan/Renderer/Shader.h"
+#include "Dolan/Renderer/Framebuffer.h"
 #include "Dolan/Renderer/Texture.h"
 #include "Dolan/Renderer/VertexArray.h"
 
