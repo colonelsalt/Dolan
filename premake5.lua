@@ -1,6 +1,6 @@
 workspace "Dolan"
 	architecture "x86_64"
-	startproject "Sandbox"
+	startproject "Dolan-Editor"
 
 	configurations
 	{

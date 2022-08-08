@@ -68,6 +68,12 @@ namespace Dolan {
 		dispatcher.Dispatch<WindowResizeEvent>(DN_BIND_EVENT_FN(OrthoCamController::OnWindowResized));
 	}
 
+	void OrthoCamController::OnResize(float width, float height)
+	{
+		m_Aspect = width / height;
+		m_Camera.SetProjection(-m_Aspect * m_ZoomLevel, m_Aspect * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
+	}
+
 	bool OrthoCamController::OnMouseScrolled(MouseScrolledEvent& e)
 	{
 		DN_PROFILE_FUNCTION();
@@ -82,8 +88,7 @@ namespace Dolan {
 	{
 		DN_PROFILE_FUNCTION();
 
-		m_Aspect = (float)e.GetWidth() / (float)e.GetHeight();
-		m_Camera.SetProjection(-m_Aspect * m_ZoomLevel, m_Aspect * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
+		OnResize((float)e.GetWidth(), (float)e.GetHeight());
 		return false;
 	}
 
