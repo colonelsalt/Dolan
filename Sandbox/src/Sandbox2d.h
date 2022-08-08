@@ -19,7 +19,6 @@ private:
 	// Temporary
 	Dolan::Ref<Dolan::VertexArray> m_SquareVa;
 	Dolan::Ref<Dolan::Shader> m_FlatColorShader;
-	Dolan::Ref<Dolan::FrameBuffer> m_Framebuffer;
 	
 	Dolan::Ref<Dolan::Texture2d> m_CheckerboardTexture;
 

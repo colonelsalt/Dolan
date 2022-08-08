@@ -14,7 +14,7 @@ namespace Dolan {
 	class Application
 	{
 	public:
-		Application();
+		Application(const std::string& name = "Dolan Engine");
 		virtual ~Application();
 		
 		void Run();
