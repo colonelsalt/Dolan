@@ -32,7 +32,9 @@ namespace Dolan {
 	void EditorLayer::OnUpdate(Timestep ts)
 	{
 		DN_PROFILE_FUNCTION();
-		m_CameraController.OnUpdate(ts);
+
+		if (m_IsViewportFocused)
+			m_CameraController.OnUpdate(ts);
 
 		Renderer2d::ResetStats();
 
@@ -144,6 +146,11 @@ namespace Dolan {
 
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0, 0 });
 		ImGui::Begin("Viewport");
+
+		m_IsViewportFocused = ImGui::IsWindowFocused();
+		m_IsViewportHovered = ImGui::IsWindowHovered();
+		Application::Get().GetImGuiLayer()->SetEventBlock(!m_IsViewportFocused || !m_IsViewportHovered);
+
 		ImVec2 viewportSize = ImGui::GetContentRegionAvail();
 		if (m_ViewportSize != *((glm::vec2*)&viewportSize))
 		{

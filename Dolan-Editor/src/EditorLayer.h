@@ -25,6 +25,8 @@ namespace Dolan {
 		
 		Ref<Texture2d> m_CheckerboardTexture;
 
+		bool m_IsViewportFocused = false, m_IsViewportHovered = false;
+
 		glm::vec2 m_ViewportSize = { 1280.0f,720.0f };
 
 		glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };

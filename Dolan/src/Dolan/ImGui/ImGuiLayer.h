@@ -20,7 +20,11 @@ namespace Dolan {
 		
 		void Begin();
 		void End();
+
+		void SetEventBlock(bool shouldBlock) { m_ShouldBlockEvents = shouldBlock; }
+
 	private:
+		bool m_ShouldBlockEvents = true;
 		float m_Time = 0.0f;
 	};
 
