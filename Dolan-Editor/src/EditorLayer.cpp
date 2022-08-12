@@ -33,6 +33,15 @@ namespace Dolan {
 	{
 		DN_PROFILE_FUNCTION();
 
+		// Resize
+		if (Dolan::FrameBufferSpec spec = m_Framebuffer->GetSpec();
+			m_ViewportSize.x > 0.0f && m_ViewportSize.y > 0.0f && // zero sized framebuffer is invalid
+			(spec.Width != m_ViewportSize.x || spec.Height != m_ViewportSize.y))
+		{
+			m_Framebuffer->Resize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
+			m_CameraController.OnResize(m_ViewportSize.x, m_ViewportSize.y);
+		}
+
 		if (m_IsViewportFocused)
 			m_CameraController.OnUpdate(ts);
 
@@ -152,13 +161,7 @@ namespace Dolan {
 		Application::Get().GetImGuiLayer()->SetEventBlock(!m_IsViewportFocused || !m_IsViewportHovered);
 
 		ImVec2 viewportSize = ImGui::GetContentRegionAvail();
-		if (m_ViewportSize != *((glm::vec2*)&viewportSize))
-		{
-			m_Framebuffer->Resize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
-			m_ViewportSize = { viewportSize.x, viewportSize.y };
-
-			m_CameraController.OnResize(viewportSize.x, viewportSize.y);
-		}
+		m_ViewportSize = { viewportSize.x, viewportSize.y };
 
 		uint32_t textureID = m_Framebuffer->GetColorAttachmentRendererId();
 		ImGui::Image((void*)textureID, viewportSize, ImVec2{ 0,1 }, ImVec2{ 1,0 });

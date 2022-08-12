@@ -5,6 +5,8 @@
 
 namespace Dolan {
 
+	static const uint32_t s_MaxFramebufferSize = 8192;
+
 	OpenGlFrameBuffer::OpenGlFrameBuffer(const FrameBufferSpec& spec)
 		: m_Spec(spec)
 	{
@@ -50,6 +52,12 @@ namespace Dolan {
 
 	void OpenGlFrameBuffer::Resize(uint32_t width, uint32_t height)
 	{
+		if (width == 0 || height == 0 || width > s_MaxFramebufferSize || height > s_MaxFramebufferSize)
+		{
+			DN_CORE_WARN("Attempted to resize framebuffer to ({0}, {1})", width, height);
+			return;
+		}
+
 		m_Spec.Width = width;
 		m_Spec.Height = height;
 
