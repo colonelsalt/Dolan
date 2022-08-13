@@ -37,6 +37,23 @@ namespace Dolan {
 
 	void Scene::OnUpdate(Timestep ts)
 	{
+		// Update scripts
+		{
+			m_Registry.view<NativeScriptComponent>().each([=](entt::entity entity, NativeScriptComponent& script)
+				{
+					if (!script.Instance)
+					{
+						script.InstantiateFunction();
+						script.Instance->m_Entity = Entity{ entity, this };
+						if (script.OnCreateFunction)
+							script.OnCreateFunction(script.Instance);
+					}
+
+					if (script.OnUpdateFunction)
+						script.OnUpdateFunction(script.Instance, ts);
+				});
+		}
+
 		// Find main camera
 		Camera* mainCamera = nullptr;
 		glm::mat4* cameraTransform = nullptr;
