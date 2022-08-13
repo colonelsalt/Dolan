@@ -31,10 +31,10 @@ namespace Dolan {
 		m_SquareEntity = square;
 
 		m_CameraEntity = m_ActiveScene->CreateEntity("Camera entity");
-		m_CameraEntity.AddComponent<CameraComponent>(glm::ortho(-16.0f, 16.0f, -9.0f, 9.0f, -1.0f, 1.0f));
+		m_CameraEntity.AddComponent<CameraComponent>();
 
 		m_SecondCameraEntity = m_ActiveScene->CreateEntity("Secondary camera");
-		CameraComponent& cc = m_SecondCameraEntity.AddComponent<CameraComponent>(glm::ortho(-1.0f, 1.0f, -1.0f, 1.0f));
+		CameraComponent& cc = m_SecondCameraEntity.AddComponent<CameraComponent>();
 		cc.IsPrimary = false;
 	}
 
@@ -54,6 +54,8 @@ namespace Dolan {
 		{
 			m_Framebuffer->Resize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
 			m_CameraController.OnResize(m_ViewportSize.x, m_ViewportSize.y);
+
+			m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
 		}
 
 		if (m_IsViewportFocused)
@@ -158,6 +160,13 @@ namespace Dolan {
 		{
 			m_CameraEntity.GetComponent<CameraComponent>().IsPrimary = m_UsePrimaryCamera;
 			m_SecondCameraEntity.GetComponent<CameraComponent>().IsPrimary = !m_UsePrimaryCamera;
+		}
+
+		{
+			SceneCamera& camera = m_SecondCameraEntity.GetComponent<CameraComponent>().Camera;
+			float orthoSize = camera.GetOrthographicSize();
+			if (ImGui::DragFloat("Camera B ortho size: ", &orthoSize))
+				camera.SetOrthographicSize(orthoSize);
 		}
 
 		ImGui::End();

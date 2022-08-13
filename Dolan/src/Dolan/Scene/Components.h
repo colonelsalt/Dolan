@@ -2,7 +2,7 @@
 
 #include <glm/glm.hpp>
 
-#include "Dolan/Renderer/Camera.h"
+#include "Dolan/Scene/SceneCamera.h"
 #include "Dolan/Renderer/OrthographicCamera.h"
 
 namespace Dolan {
@@ -42,13 +42,12 @@ namespace Dolan {
 
 	struct CameraComponent
 	{
-		Dolan::Camera Camera;
+		SceneCamera Camera;
 		bool IsPrimary = true;
+		bool IsAspectRatioFixed = false;
 
 		CameraComponent() = default;
 		CameraComponent(const CameraComponent&) = default;
-		CameraComponent(const glm::mat4& projection)
-			: Camera(projection) {}
 	};
 
 }
