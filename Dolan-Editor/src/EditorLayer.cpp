@@ -25,10 +25,17 @@ namespace Dolan {
 
 		m_ActiveScene = CreateRef<Scene>();
 
-		auto square = m_ActiveScene->CreateEntity("Green square");
+		Entity square = m_ActiveScene->CreateEntity("Green square");
 		square.AddComponent<SpriteRendererComponent>(glm::vec4{0.0f, 1.0f, 0.0f, 1.0f});
-
+		
 		m_SquareEntity = square;
+
+		m_CameraEntity = m_ActiveScene->CreateEntity("Camera entity");
+		m_CameraEntity.AddComponent<CameraComponent>(glm::ortho(-16.0f, 16.0f, -9.0f, 9.0f, -1.0f, 1.0f));
+
+		m_SecondCameraEntity = m_ActiveScene->CreateEntity("Secondary camera");
+		CameraComponent& cc = m_SecondCameraEntity.AddComponent<CameraComponent>(glm::ortho(-1.0f, 1.0f, -1.0f, 1.0f));
+		cc.IsPrimary = false;
 	}
 
 	void EditorLayer::OnDetach()
@@ -41,7 +48,7 @@ namespace Dolan {
 		DN_PROFILE_FUNCTION();
 
 		// Resize
-		if (Dolan::FrameBufferSpec spec = m_Framebuffer->GetSpec();
+		if (FrameBufferSpec spec = m_Framebuffer->GetSpec();
 			m_ViewportSize.x > 0.0f && m_ViewportSize.y > 0.0f && // zero sized framebuffer is invalid
 			(spec.Width != m_ViewportSize.x || spec.Height != m_ViewportSize.y))
 		{
@@ -58,13 +65,8 @@ namespace Dolan {
 		RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		RenderCommand::Clear();
 
-
-		Renderer2d::BeginScene(m_CameraController.GetCamera());
-
 		// Update scene
 		m_ActiveScene->OnUpdate(ts);
-
-		Renderer2d::EndScene();
 
 		m_Framebuffer->Unbind();
 	}
@@ -148,6 +150,14 @@ namespace Dolan {
 
 			glm::vec4& squareColor = m_SquareEntity.GetComponent<SpriteRendererComponent>().Color;
 			ImGui::ColorEdit4("Square Color", glm::value_ptr(squareColor));
+			ImGui::Separator();
+		}
+
+		ImGui::DragFloat3("Primary camera position", glm::value_ptr(m_CameraEntity.GetComponent<TransformComponent>().Transform[3]));
+		if (ImGui::Checkbox("Camera A", &m_UsePrimaryCamera))
+		{
+			m_CameraEntity.GetComponent<CameraComponent>().IsPrimary = m_UsePrimaryCamera;
+			m_SecondCameraEntity.GetComponent<CameraComponent>().IsPrimary = !m_UsePrimaryCamera;
 		}
 
 		ImGui::End();

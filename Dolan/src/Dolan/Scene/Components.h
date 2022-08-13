@@ -2,6 +2,9 @@
 
 #include <glm/glm.hpp>
 
+#include "Dolan/Renderer/Camera.h"
+#include "Dolan/Renderer/OrthographicCamera.h"
+
 namespace Dolan {
 
 	struct TagComponent
@@ -35,6 +38,17 @@ namespace Dolan {
 		SpriteRendererComponent(const SpriteRendererComponent&) = default;
 		SpriteRendererComponent(const glm::vec4& color)
 			: Color(color) {}
+	};
+
+	struct CameraComponent
+	{
+		Dolan::Camera Camera;
+		bool IsPrimary = true;
+
+		CameraComponent() = default;
+		CameraComponent(const CameraComponent&) = default;
+		CameraComponent(const glm::mat4& projection)
+			: Camera(projection) {}
 	};
 
 }
