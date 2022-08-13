@@ -23,6 +23,7 @@ IncludeDir["Glad"] = "Dolan/vendor/Glad/include"
 IncludeDir["ImGui"] = "Dolan/vendor/imgui"
 IncludeDir["glm"] = "Dolan/vendor/glm"
 IncludeDir["stb_image"] = "Dolan/vendor/stb_image"
+IncludeDir["entt"] = "Dolan/vendor/entt/include"
 
 group "Dependencies"
 	include "Dolan/vendor/GLFW"
@@ -68,7 +69,8 @@ project "Dolan"
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.ImGui}",
 		"%{IncludeDir.glm}",
-		"%{IncludeDir.stb_image}"
+		"%{IncludeDir.stb_image}",
+		"%{IncludeDir.entt}"
 	}
 
 	links 
@@ -123,7 +125,8 @@ project "Sandbox"
 		"Dolan/vendor/spdlog/include",
 		"Dolan/src",
 		"Dolan/vendor",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.entt}"
 	}
 
 	links
@@ -175,7 +178,8 @@ project "Dolan-Editor"
 		"Dolan/vendor/spdlog/include",
 		"Dolan/src",
 		"Dolan/vendor",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.entt}"
 	}
 
 	links

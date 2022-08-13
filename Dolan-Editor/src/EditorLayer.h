@@ -23,6 +23,9 @@ namespace Dolan {
 		Ref<Shader> m_FlatColorShader;
 		Ref<FrameBuffer> m_Framebuffer;
 		
+		Ref<Scene> m_ActiveScene;
+		entt::entity m_SquareEntity;
+
 		Ref<Texture2d> m_CheckerboardTexture;
 
 		bool m_IsViewportFocused = false, m_IsViewportHovered = false;
