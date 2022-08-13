@@ -4,6 +4,8 @@
 #include "Components.h"
 #include "Dolan/Renderer/Renderer2d.h"
 
+#include "Entity.h"
+
 namespace Dolan {
 
 	Scene::Scene()
@@ -19,9 +21,18 @@ namespace Dolan {
 	{
 	}
 
-	entt::entity Scene::CreateEntity()
+	Entity Scene::CreateEntity(const std::string& name)
 	{
-		return m_Registry.create();
+		Entity entity = { m_Registry.create(), this };
+		entity.AddComponent<TransformComponent>();
+		TagComponent& tag = entity.AddComponent<TagComponent>();
+		
+		if (name.empty())
+			tag.Tag = "Entity";
+		else
+			tag.Tag = name;
+
+		return entity;
 	}
 
 	void Scene::OnUpdate(Timestep ts)

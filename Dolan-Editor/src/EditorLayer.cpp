@@ -25,10 +25,10 @@ namespace Dolan {
 
 		m_ActiveScene = CreateRef<Scene>();
 
-		m_SquareEntity = m_ActiveScene->CreateEntity();
-		m_ActiveScene->Reg().emplace<TransformComponent>(m_SquareEntity);
-		m_ActiveScene->Reg().emplace<SpriteRendererComponent>(m_SquareEntity, glm::vec4{0.0f, 1.0f, 0.0f, 1.0f});
+		auto square = m_ActiveScene->CreateEntity("Green square");
+		square.AddComponent<SpriteRendererComponent>(glm::vec4{0.0f, 1.0f, 0.0f, 1.0f});
 
+		m_SquareEntity = square;
 	}
 
 	void EditorLayer::OnDetach()
@@ -141,8 +141,14 @@ namespace Dolan {
 		ImGui::Text("Vertices: %d", stats.GetTotalVertexCount());
 		ImGui::Text("Indices: %d", stats.GetTotalIndexCount());
 
-		glm::vec4& squareColor = m_ActiveScene->Reg().get<SpriteRendererComponent>(m_SquareEntity).Color;
-		ImGui::ColorEdit4("Square Color", glm::value_ptr(squareColor));
+		if (m_SquareEntity)
+		{
+			ImGui::Separator();
+			ImGui::Text("%s", m_SquareEntity.GetComponent<TagComponent>().Tag.c_str());
+
+			glm::vec4& squareColor = m_SquareEntity.GetComponent<SpriteRendererComponent>().Color;
+			ImGui::ColorEdit4("Square Color", glm::value_ptr(squareColor));
+		}
 
 		ImGui::End();
 

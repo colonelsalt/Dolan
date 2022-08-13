@@ -24,7 +24,7 @@ namespace Dolan {
 		Ref<FrameBuffer> m_Framebuffer;
 		
 		Ref<Scene> m_ActiveScene;
-		entt::entity m_SquareEntity;
+		Entity m_SquareEntity;
 
 		Ref<Texture2d> m_CheckerboardTexture;
 

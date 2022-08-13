@@ -16,6 +16,7 @@
 #include "Dolan/ImGui/ImGuiLayer.h"
 
 #include "Dolan/Scene/Scene.h"
+#include "Dolan/Scene/Entity.h"
 #include "Dolan/Scene/Components.h"
 
 #include "Dolan/Renderer/Renderer.h"
