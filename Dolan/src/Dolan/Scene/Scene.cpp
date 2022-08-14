@@ -40,18 +40,16 @@ namespace Dolan {
 		// Update scripts
 		{
 			m_Registry.view<NativeScriptComponent>().each([=](entt::entity entity, NativeScriptComponent& script)
+			{
+				if (!script.Instance)
 				{
-					if (!script.Instance)
-					{
-						script.InstantiateFunction();
-						script.Instance->m_Entity = Entity{ entity, this };
-						if (script.OnCreateFunction)
-							script.OnCreateFunction(script.Instance);
-					}
+					script.Instance = script.InstantiateScript();
+					script.Instance->m_Entity = Entity{ entity, this };
+					script.Instance->OnCreate();
+				}
 
-					if (script.OnUpdateFunction)
-						script.OnUpdateFunction(script.Instance, ts);
-				});
+				script.Instance->OnUpdate(ts);
+			});
 		}
 
 		// Find main camera
@@ -61,7 +59,7 @@ namespace Dolan {
 			auto view = m_Registry.view<TransformComponent, CameraComponent>();
 			for (entt::entity entity : view)
 			{
-				auto& [transform, camera] = view.get<TransformComponent, CameraComponent>(entity);
+				auto [transform, camera] = view.get<TransformComponent, CameraComponent>(entity);
 				
 				if (camera.IsPrimary)
 				{
@@ -80,7 +78,7 @@ namespace Dolan {
 			auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
 			for (entt::entity entity : group)
 			{
-				auto& [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
+				auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
 
 				Renderer2d::DrawQuad(transform, sprite.Color);
 			}
