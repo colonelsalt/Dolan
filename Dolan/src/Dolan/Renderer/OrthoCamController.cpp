@@ -17,23 +17,23 @@ namespace Dolan {
 	{
 		DN_PROFILE_FUNCTION();
 
-		if (Input::IsKeyPressed(DN_KEY_A))
+		if (Input::IsKeyPressed(Key::A))
 		{
 			m_CameraPos.x -= cos(glm::radians(m_CameraRot)) * m_CameraTranslateSpeed * ts;
 			m_CameraPos.y -= sin(glm::radians(m_CameraRot)) * m_CameraTranslateSpeed * ts;
 		}
-		else if (Input::IsKeyPressed(DN_KEY_D))
+		else if (Input::IsKeyPressed(Key::D))
 		{
 			m_CameraPos.x += cos(glm::radians(m_CameraRot)) * m_CameraTranslateSpeed * ts;
 			m_CameraPos.y += sin(glm::radians(m_CameraRot)) * m_CameraTranslateSpeed * ts;
 		}
 
-		if (Input::IsKeyPressed(DN_KEY_W))
+		if (Input::IsKeyPressed(Key::W))
 		{
 			m_CameraPos.x += -sin(glm::radians(m_CameraRot)) * m_CameraTranslateSpeed * ts;
 			m_CameraPos.y += cos(glm::radians(m_CameraRot)) * m_CameraTranslateSpeed * ts;
 		}
-		else if (Input::IsKeyPressed(DN_KEY_S))
+		else if (Input::IsKeyPressed(Key::S))
 		{
 			m_CameraPos.x -= -sin(glm::radians(m_CameraRot)) * m_CameraTranslateSpeed * ts;
 			m_CameraPos.y -= cos(glm::radians(m_CameraRot)) * m_CameraTranslateSpeed * ts;
@@ -41,9 +41,9 @@ namespace Dolan {
 
 		if (m_RotationEnabled)
 		{
-			if (Input::IsKeyPressed(DN_KEY_Q))
+			if (Input::IsKeyPressed(Key::Q))
 				m_CameraRot += m_CameraRotSpeed * ts;
-			if (Input::IsKeyPressed(DN_KEY_E))
+			if (Input::IsKeyPressed(Key::E))
 				m_CameraRot -= m_CameraRotSpeed * ts;
 			
 			if (m_CameraRot > 180.0f)
