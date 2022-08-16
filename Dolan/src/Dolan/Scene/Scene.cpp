@@ -49,7 +49,7 @@ namespace Dolan {
 
 		// Find main camera
 		Camera* mainCamera = nullptr;
-		glm::mat4* cameraTransform = nullptr;
+		glm::mat4 cameraTransform;
 		{
 			auto view = m_Registry.view<TransformComponent, CameraComponent>();
 			for (entt::entity entity : view)
@@ -59,7 +59,7 @@ namespace Dolan {
 				if (camera.IsPrimary)
 				{
 					mainCamera = &camera.Camera;
-					cameraTransform = &transform.Transform;
+					cameraTransform = transform.GetTransform();
 					break;
 				}
 			}
@@ -67,7 +67,7 @@ namespace Dolan {
 
 		if (mainCamera)
 		{
-			Renderer2d::BeginScene(*mainCamera, *cameraTransform);
+			Renderer2d::BeginScene(*mainCamera, cameraTransform);
 
 			// All entities that have a Transform and SpriteRenderer component
 			auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
@@ -75,7 +75,7 @@ namespace Dolan {
 			{
 				auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
 
-				Renderer2d::DrawQuad(transform, sprite.Color);
+				Renderer2d::DrawQuad(transform.GetTransform(), sprite.Color);
 			}
 
 			Renderer2d::EndScene();
