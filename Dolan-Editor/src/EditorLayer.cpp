@@ -33,10 +33,10 @@ namespace Dolan {
 
 		m_SquareEntity = square;
 
-		m_CameraEntity = m_ActiveScene->CreateEntity("Camera entity");
+		m_CameraEntity = m_ActiveScene->CreateEntity("Camera A");
 		m_CameraEntity.AddComponent<CameraComponent>();
 
-		m_SecondCameraEntity = m_ActiveScene->CreateEntity("Secondary camera");
+		m_SecondCameraEntity = m_ActiveScene->CreateEntity("Camera B");
 		CameraComponent& cc = m_SecondCameraEntity.AddComponent<CameraComponent>();
 		cc.IsPrimary = false;
 
@@ -175,7 +175,7 @@ namespace Dolan {
 
 		m_SceneHierarchyPanel.OnImGuiRender();
 
-		ImGui::Begin("Settings");
+		ImGui::Begin("Stats");
 
 		auto stats = Renderer2d::GetStats();
 		ImGui::Text("Renderer2D Stats:");
@@ -183,30 +183,6 @@ namespace Dolan {
 		ImGui::Text("Quads: %d", stats.QuadCount);
 		ImGui::Text("Vertices: %d", stats.GetTotalVertexCount());
 		ImGui::Text("Indices: %d", stats.GetTotalIndexCount());
-
-		if (m_SquareEntity)
-		{
-			ImGui::Separator();
-			ImGui::Text("%s", m_SquareEntity.GetComponent<TagComponent>().Tag.c_str());
-
-			glm::vec4& squareColor = m_SquareEntity.GetComponent<SpriteRendererComponent>().Color;
-			ImGui::ColorEdit4("Square Color", glm::value_ptr(squareColor));
-			ImGui::Separator();
-		}
-
-		ImGui::DragFloat3("Primary camera position", glm::value_ptr(m_CameraEntity.GetComponent<TransformComponent>().Transform[3]));
-		if (ImGui::Checkbox("Camera A", &m_UsePrimaryCamera))
-		{
-			m_CameraEntity.GetComponent<CameraComponent>().IsPrimary = m_UsePrimaryCamera;
-			m_SecondCameraEntity.GetComponent<CameraComponent>().IsPrimary = !m_UsePrimaryCamera;
-		}
-
-		{
-			SceneCamera& camera = m_SecondCameraEntity.GetComponent<CameraComponent>().Camera;
-			float orthoSize = camera.GetOrthographicSize();
-			if (ImGui::DragFloat("Camera B ortho size: ", &orthoSize))
-				camera.SetOrthographicSize(orthoSize);
-		}
 
 		ImGui::End();
 

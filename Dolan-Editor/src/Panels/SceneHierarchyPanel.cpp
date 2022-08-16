@@ -157,6 +157,17 @@ namespace Dolan {
 				ImGui::TreePop();
 			}
 		}
+
+		if (entity.HasComponent<SpriteRendererComponent>())
+		{
+			if (ImGui::TreeNodeEx((void*)typeid(SpriteRendererComponent).hash_code(), ImGuiTreeNodeFlags_DefaultOpen, "Sprite renderer"))
+			{
+				SpriteRendererComponent& spriteComp = entity.GetComponent<SpriteRendererComponent>();
+				ImGui::ColorEdit4("Colour", glm::value_ptr(spriteComp.Color));
+
+				ImGui::TreePop();
+			}
+		}
 	}
 
 }
