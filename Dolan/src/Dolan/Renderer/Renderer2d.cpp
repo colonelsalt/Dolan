@@ -121,10 +121,7 @@ namespace Dolan {
 		s_Data.TextureShader->Bind();
 		s_Data.TextureShader->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
 
-		s_Data.QuadIndexCount = 0;
-		s_Data.TextureSlotIndex = 1;
-		s_Data.QuadVertexBufferPtr = s_Data.QuadVertexBufferBase;
-
+		StartBatch();
 	}
 
 	void Renderer2d::BeginScene(const Camera& camera, const glm::mat4 transform)
@@ -136,17 +133,12 @@ namespace Dolan {
 		s_Data.TextureShader->Bind();
 		s_Data.TextureShader->SetMat4("u_ViewProjection", viewProj);
 
-		s_Data.QuadIndexCount = 0;
-		s_Data.TextureSlotIndex = 1;
-		s_Data.QuadVertexBufferPtr = s_Data.QuadVertexBufferBase;
+		StartBatch();
 	}
 
 	void Renderer2d::EndScene()
 	{
 		DN_PROFILE_FUNCTION();
-
-		uint32_t dataSize = (uint8_t*)s_Data.QuadVertexBufferPtr - (uint8_t*)s_Data.QuadVertexBufferBase;
-		s_Data.QuadVertexBuffer->SetData(s_Data.QuadVertexBufferBase, dataSize);
 
 		Flush();
 	}
@@ -156,20 +148,14 @@ namespace Dolan {
 		if (s_Data.QuadIndexCount == 0)
 			return; // Nothing to draw
 
+		uint32_t dataSize = (uint8_t*)s_Data.QuadVertexBufferPtr - (uint8_t*)s_Data.QuadVertexBufferBase;
+		s_Data.QuadVertexBuffer->SetData(s_Data.QuadVertexBufferBase, dataSize);
+
 		for (uint32_t i = 0; i < s_Data.TextureSlotIndex; i++)
 			s_Data.TextureSlots[i]->Bind(i);
 
 		RenderCommand::DrawIndexed(s_Data.QuadVertexArray, s_Data.QuadIndexCount);
 		s_Data.Stats.DrawCalls++;
-	}
-
-	void Renderer2d::FlushAndReset()
-	{
-		EndScene();
-
-		s_Data.QuadIndexCount = 0;
-		s_Data.TextureSlotIndex = 1;
-		s_Data.QuadVertexBufferPtr = s_Data.QuadVertexBufferBase;
 	}
 
 	void Renderer2d::DrawQuad(const glm::vec2& position, const glm::vec2& size, const glm::vec4& color)
@@ -213,7 +199,7 @@ namespace Dolan {
 		const float tilingFactor = 1.0f;
 
 		if (s_Data.QuadIndexCount >= Renderer2dData::MaxIndices)
-			FlushAndReset();
+			NextBatch();
 
 		for (size_t i = 0; i < quadVertexCount; i++)
 		{
@@ -239,7 +225,7 @@ namespace Dolan {
 		constexpr glm::vec2 textureCoords[] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
 
 		if (s_Data.QuadIndexCount >= Renderer2dData::MaxIndices)
-			FlushAndReset();
+			NextBatch();
 
 		float textureIndex = 0.0f;
 
@@ -255,7 +241,7 @@ namespace Dolan {
 		if (textureIndex == 0.0f)
 		{
 			if (s_Data.TextureSlotIndex >= Renderer2dData::MaxTextureSlots)
-				FlushAndReset();
+				NextBatch();
 
 			textureIndex = (float)s_Data.TextureSlotIndex;
 			s_Data.TextureSlots[s_Data.TextureSlotIndex] = texture;
@@ -313,6 +299,19 @@ namespace Dolan {
 	void Renderer2d::ResetStats()
 	{
 		memset(&s_Data.Stats, 0, sizeof(Statistics));
+	}
+
+	void Renderer2d::StartBatch()
+	{
+		s_Data.QuadIndexCount = 0;
+		s_Data.TextureSlotIndex = 1;
+		s_Data.QuadVertexBufferPtr = s_Data.QuadVertexBufferBase;
+	}
+
+	void Renderer2d::NextBatch()
+	{
+		Flush();
+		StartBatch();
 	}
 
 	Renderer2d::Statistics Renderer2d::GetStats()
