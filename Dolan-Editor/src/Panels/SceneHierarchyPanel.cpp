@@ -32,12 +32,39 @@ namespace Dolan {
 		if (ImGui::IsMouseDown(0) && ImGui::IsWindowHovered())
 			m_SelectedEntity = {};
 
+		// Right-click on blank space
+		if (ImGui::BeginPopupContextWindow(0, 1, false))
+		{
+			if (ImGui::MenuItem("Create empty entity"))
+				m_Context->CreateEntity("Empty entity");
+
+			ImGui::EndPopup();
+		}
+
 		ImGui::End();
 
 		ImGui::Begin("Properties");
 		if (m_SelectedEntity)
 		{
 			DrawComponents(m_SelectedEntity);
+
+			if (ImGui::Button("Add component"))
+				ImGui::OpenPopup("AddComponent");
+			if (ImGui::BeginPopup("AddComponent"))
+			{
+				if (ImGui::MenuItem("Camera"))
+				{
+					m_SelectedEntity.AddComponent<CameraComponent>();
+					ImGui::CloseCurrentPopup();
+				}
+				if (ImGui::MenuItem("Sprite renderer"))
+				{
+					m_SelectedEntity.AddComponent<SpriteRendererComponent>();
+					ImGui::CloseCurrentPopup();
+				}
+
+				ImGui::EndPopup();
+			}
 		}
 
 
@@ -58,10 +85,27 @@ namespace Dolan {
 			m_SelectedEntity = entity;
 		}
 
+		bool wasEntityDeleted = false;
+		if (ImGui::BeginPopupContextItem())
+		{
+			if (ImGui::MenuItem("Delete entity"))
+				wasEntityDeleted = true;
+
+			ImGui::EndPopup();
+		}
+
 		if (isExpanded)
 		{
 			ImGui::TreePop();
 		}
+
+		if (wasEntityDeleted)
+		{
+			m_Context->DestroyEntity(entity);
+			if (m_SelectedEntity == entity)
+				m_SelectedEntity = {};
+		}
+
 	}
 
 	static void DrawVec3Control(const std::string& label, glm::vec3& values, float resetValue = 0.0f, float columnWidth = 100.0f)
@@ -138,9 +182,12 @@ namespace Dolan {
 			}
 		}
 
+		constexpr ImGuiTreeNodeFlags treeNodeFlags = ImGuiTreeNodeFlags_DefaultOpen | ImGuiTreeNodeFlags_AllowItemOverlap;
+
 		if (entity.HasComponent<TransformComponent>())
 		{
-			if (ImGui::TreeNodeEx((void*)typeid(TransformComponent).hash_code(), ImGuiTreeNodeFlags_DefaultOpen, "Transform"))
+			bool isExpanded = ImGui::TreeNodeEx((void*)typeid(TransformComponent).hash_code(), treeNodeFlags, "Transform");
+			if (isExpanded)
 			{
 				TransformComponent& transformComp = entity.GetComponent<TransformComponent>();
 
@@ -158,7 +205,7 @@ namespace Dolan {
 
 		if (entity.HasComponent<CameraComponent>())
 		{
-			if (ImGui::TreeNodeEx((void*)typeid(CameraComponent).hash_code(), ImGuiTreeNodeFlags_DefaultOpen, "Camera"))
+			if (ImGui::TreeNodeEx((void*)typeid(CameraComponent).hash_code(), treeNodeFlags, "Camera"))
 			{
 				CameraComponent& cameraComponent = entity.GetComponent<CameraComponent>();
 				SceneCamera& camera = cameraComponent.Camera;
@@ -225,13 +272,36 @@ namespace Dolan {
 
 		if (entity.HasComponent<SpriteRendererComponent>())
 		{
-			if (ImGui::TreeNodeEx((void*)typeid(SpriteRendererComponent).hash_code(), ImGuiTreeNodeFlags_DefaultOpen, "Sprite renderer"))
+			ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2{ 4, 4 });
+
+			bool isExpanded = ImGui::TreeNodeEx((void*)typeid(SpriteRendererComponent).hash_code(), treeNodeFlags, "Sprite renderer");
+
+			ImGui::SameLine(ImGui::GetWindowWidth() - 25.0f);
+			if (ImGui::Button("+", ImVec2{20, 20}))
+			{
+				ImGui::OpenPopup("ComponentSettings");
+			}
+			ImGui::PopStyleVar();
+
+			bool shouldRemoveComponent = false;
+			if (ImGui::BeginPopup("ComponentSettings"))
+			{
+				if (ImGui::MenuItem("Remove component"))
+					shouldRemoveComponent = true;
+
+				ImGui::EndPopup();
+			}
+
+			if (isExpanded)
 			{
 				SpriteRendererComponent& spriteComp = entity.GetComponent<SpriteRendererComponent>();
 				ImGui::ColorEdit4("Colour", glm::value_ptr(spriteComp.Color));
 
 				ImGui::TreePop();
 			}
+
+			if (shouldRemoveComponent)
+				entity.RemoveComponent<SpriteRendererComponent>();
 		}
 	}
 
