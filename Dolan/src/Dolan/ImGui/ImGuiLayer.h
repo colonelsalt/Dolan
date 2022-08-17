@@ -22,7 +22,7 @@ namespace Dolan {
 		void End();
 
 		void SetEventBlock(bool shouldBlock) { m_ShouldBlockEvents = shouldBlock; }
-
+		void SetDarkThemeColors();
 	private:
 		bool m_ShouldBlockEvents = true;
 		float m_Time = 0.0f;
