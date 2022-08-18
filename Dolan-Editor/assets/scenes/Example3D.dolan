@@ -4,7 +4,7 @@ Entities:
     TagComponent:
       Tag: Camera B
     TransformComponent:
-      Translation: [0, 1.70000005, 8.60000038]
+      Translation: [-0.200000003, -2, 8.60000038]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     CameraComponent:
@@ -16,7 +16,7 @@ Entities:
         OrthographicSize: 10
         OrthographicNear: -1
         OrthographicFar: 1
-      IsPrimary: false
+      IsPrimary: true
       IsAspectRatioFixed: false
   - Entity: 739587394
     TagComponent:
@@ -34,7 +34,7 @@ Entities:
         OrthographicSize: 10
         OrthographicNear: -1
         OrthographicFar: 1
-      IsPrimary: true
+      IsPrimary: false
       IsAspectRatioFixed: false
   - Entity: 739587394
     TagComponent:
@@ -49,7 +49,7 @@ Entities:
     TagComponent:
       Tag: Green square
     TransformComponent:
-      Translation: [2.0999999, 0, 0]
+      Translation: [2.20000005, 0, -10.5]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     SpriteRendererComponent:

@@ -16,6 +16,7 @@ namespace Dolan {
 	void SceneHierarchyPanel::SetContext(const Ref<Scene>& context)
 	{
 		m_Context = context;
+		m_SelectedEntity = {};
 	}
 
 	void SceneHierarchyPanel::OnImGuiRender()
