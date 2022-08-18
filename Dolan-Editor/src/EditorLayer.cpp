@@ -1,5 +1,7 @@
 #include "EditorLayer.h"
 
+#include "Dolan/Scene/SceneSerializer.h"
+
 #include <imgui/imgui.h>
 
 #include <glm/gtc/matrix_transform.hpp>
@@ -24,7 +26,7 @@ namespace Dolan {
 		m_Framebuffer = FrameBuffer::Create(fbSpec);
 
 		m_ActiveScene = CreateRef<Scene>();
-
+#if 0
 		Entity square = m_ActiveScene->CreateEntity("Green square");
 		square.AddComponent<SpriteRendererComponent>(glm::vec4{0.0f, 1.0f, 0.0f, 1.0f});
 		
@@ -71,8 +73,10 @@ namespace Dolan {
 		};
 
 		m_SecondCameraEntity.AddComponent<NativeScriptComponent>().Bind<CameraController>();
-
+#endif
 		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
+		//SceneSerializer serializer(m_ActiveScene);
+		//serializer.Deserialize("assets/scenes/ExampleScene.dolan");
 	}
 
 	void EditorLayer::OnDetach()
@@ -170,6 +174,18 @@ namespace Dolan {
 				// Disabling fullscreen would allow the window to be moved to the front of other windows, 
 				// which we can't undo at the moment without finer window depth/z control.
 				//ImGui::MenuItem("Fullscreen", NULL, &opt_fullscreen_persistant);
+
+				if (ImGui::MenuItem("Serialise"))
+				{
+					SceneSerializer serializer(m_ActiveScene);
+					serializer.Serialize("assets/scenes/ExampleScene.dolan");
+				}
+
+				if (ImGui::MenuItem("Deserialise"))
+				{
+					SceneSerializer serializer(m_ActiveScene);
+					serializer.Deserialize("assets/scenes/ExampleScene.dolan");
+				}
 
 				if (ImGui::MenuItem("Exit")) Application::Get().Close();
 				ImGui::EndMenu();

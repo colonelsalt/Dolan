@@ -24,12 +24,13 @@ IncludeDir["ImGui"] = "Dolan/vendor/imgui"
 IncludeDir["glm"] = "Dolan/vendor/glm"
 IncludeDir["stb_image"] = "Dolan/vendor/stb_image"
 IncludeDir["entt"] = "Dolan/vendor/entt/include"
+IncludeDir["yaml_cpp"] = "Dolan/vendor/yaml-cpp/include"
 
 group "Dependencies"
 	include "Dolan/vendor/GLFW"
 	include "Dolan/vendor/Glad"
 	include "Dolan/vendor/imgui"
-
+	include "Dolan/vendor/yaml-cpp"
 group ""
 
 project "Dolan"
@@ -70,7 +71,8 @@ project "Dolan"
 		"%{IncludeDir.ImGui}",
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.stb_image}",
-		"%{IncludeDir.entt}"
+		"%{IncludeDir.entt}",
+		"%{IncludeDir.yaml_cpp}"
 	}
 
 	links 
@@ -78,6 +80,7 @@ project "Dolan"
 		"GLFW",
 		"Glad",
 		"ImGui",
+		"yaml-cpp",
 		"opengl32.lib"
 	}
 
