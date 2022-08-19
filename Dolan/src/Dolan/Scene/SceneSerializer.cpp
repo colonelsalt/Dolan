@@ -18,6 +18,7 @@ namespace YAML {
 			node.push_back(v.x);
 			node.push_back(v.y);
 			node.push_back(v.z);
+			node.SetStyle(EmitterStyle::Flow);
 			return node;
 		}
 
@@ -43,6 +44,7 @@ namespace YAML {
 			node.push_back(v.y);
 			node.push_back(v.z);
 			node.push_back(v.w);
+			node.SetStyle(EmitterStyle::Flow);
 			return node;
 		}
 
@@ -181,11 +183,7 @@ namespace Dolan {
 
 	bool SceneSerializer::Deserialize(const std::string& filepath)
 	{
-		std::ifstream stream(filepath);
-		std::stringstream strStream;
-		strStream << stream.rdbuf();
-
-		YAML::Node data = YAML::Load(strStream.str());
+		YAML::Node data = YAML::LoadFile(filepath);
 		if (!data["Scene"])
 			return false;
 
