@@ -105,6 +105,18 @@ namespace Dolan {
 		}
 	}
 
+	Entity Scene::GetPrimaryCameraEntity()
+	{
+		auto view = m_Registry.view<CameraComponent>();
+		for (entt::entity entity : view)
+		{
+			const CameraComponent& camera = view.get<CameraComponent>(entity);
+			if (camera.IsPrimary)
+				return Entity{ entity, this };
+		}
+		return {};
+	}
+
 	template<typename T>
 	void Scene::OnComponentAdded(Entity entity, T& component)
 	{

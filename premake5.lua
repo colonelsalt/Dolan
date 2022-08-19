@@ -25,6 +25,7 @@ IncludeDir["glm"] = "Dolan/vendor/glm"
 IncludeDir["stb_image"] = "Dolan/vendor/stb_image"
 IncludeDir["entt"] = "Dolan/vendor/entt/include"
 IncludeDir["yaml_cpp"] = "Dolan/vendor/yaml-cpp/include"
+IncludeDir["ImGuizmo"] = "Dolan/vendor/ImGuizmo"
 
 group "Dependencies"
 	include "Dolan/vendor/GLFW"
@@ -54,6 +55,8 @@ project "Dolan"
 		"%{prj.name}/vendor/stb_image/**.h",
 		"%{prj.name}/vendor/glm/glm/**.hpp",
 		"%{prj.name}/vendor/glm/glm/**.inl",
+		"%{prj.name}/vendor/ImGuizmo/ImGuizmo.h",
+		"%{prj.name}/vendor/ImGuizmo/ImGuizmo.cpp"
 	}
 
 	defines
@@ -72,7 +75,8 @@ project "Dolan"
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.stb_image}",
 		"%{IncludeDir.entt}",
-		"%{IncludeDir.yaml_cpp}"
+		"%{IncludeDir.yaml_cpp}",
+		"%{IncludeDir.ImGuizmo}"
 	}
 
 	links 
@@ -83,6 +87,9 @@ project "Dolan"
 		"yaml-cpp",
 		"opengl32.lib"
 	}
+
+	filter "files:vendor/ImGuizmo/**.cpp"
+	flags { "NoPCH" }
 
 	filter "system:windows"
 		systemversion "latest"
@@ -182,7 +189,8 @@ project "Dolan-Editor"
 		"Dolan/src",
 		"Dolan/vendor",
 		"%{IncludeDir.glm}",
-		"%{IncludeDir.entt}"
+		"%{IncludeDir.entt}",
+		"%{IncludeDir.ImGuizmo}"
 	}
 
 	links

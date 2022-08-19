@@ -8,6 +8,9 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "Dolan/Utils/PlatformUtils.h"
+#include "Dolan/Math/Math.h"
+
+#include <ImGuizmo.h>
 
 namespace Dolan {
 
@@ -211,13 +214,59 @@ namespace Dolan {
 
 		m_IsViewportFocused = ImGui::IsWindowFocused();
 		m_IsViewportHovered = ImGui::IsWindowHovered();
-		Application::Get().GetImGuiLayer()->SetEventBlock(!m_IsViewportFocused || !m_IsViewportHovered);
+		Application::Get().GetImGuiLayer()->SetEventBlock(!m_IsViewportFocused && !m_IsViewportHovered);
 
 		ImVec2 viewportSize = ImGui::GetContentRegionAvail();
 		m_ViewportSize = { viewportSize.x, viewportSize.y };
 
 		uint32_t textureID = m_Framebuffer->GetColorAttachmentRendererId();
 		ImGui::Image((void*)textureID, viewportSize, ImVec2{ 0,1 }, ImVec2{ 1,0 });
+
+		// Gizmos
+		Entity selectedEntity = m_SceneHierarchyPanel.GetSelectedEntity();
+		if (selectedEntity && m_GizmoType != -1)
+		{
+			ImGuizmo::SetOrthographic(false);
+			ImGuizmo::SetDrawlist();
+			float windowWidth = (float)ImGui::GetWindowWidth();
+			float windowHeight = (float)ImGui::GetWindowHeight();
+			ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, windowWidth, windowHeight);
+
+			// Camera
+			Entity cameraEntity = m_ActiveScene->GetPrimaryCameraEntity();
+			const SceneCamera& camera = cameraEntity.GetComponent<CameraComponent>().Camera;
+			const glm::mat4& cameraProjection = camera.GetProjection();
+			glm::mat4 cameraView = glm::inverse(cameraEntity.GetComponent<TransformComponent>().GetTransform());
+
+			// Entity transform
+			TransformComponent& tc = selectedEntity.GetComponent<TransformComponent>();
+			glm::mat4& transform = tc.GetTransform();
+
+			// Snapping
+			bool shouldSnap = Input::IsKeyPressed(Key::LeftControl);
+			float snapValue = 0.5f; // Snap to 0.5m for translation/scale
+			if (m_GizmoType == ImGuizmo::ROTATE)
+				snapValue = 45.0f; // Snap to 45 deg. for rotation
+
+			float snapValues[3] = { snapValue, snapValue, snapValue };
+
+			ImGuizmo::Manipulate(glm::value_ptr(cameraView), glm::value_ptr(cameraProjection), (ImGuizmo::OPERATION)m_GizmoType,
+								 ImGuizmo::LOCAL, glm::value_ptr(transform), nullptr, shouldSnap ? snapValues : nullptr);
+
+			if (ImGuizmo::IsUsing())
+			{
+				glm::vec3 translation, rotation, scale;
+				Math::DecomposeTransform(transform, translation, rotation, scale);
+
+				glm::vec3 deltaRotation = rotation - tc.Rotation;
+				tc.Translation = translation;
+				tc.Rotation += deltaRotation;
+				tc.Scale = scale;
+
+			}
+		}
+
+
 		ImGui::End();
 		ImGui::PopStyleVar();
 
@@ -254,6 +303,19 @@ namespace Dolan {
 			case Key::O:
 				if (ctrlPressed)
 					OpenScene();
+				break;
+			// Gizmos
+			case Key::Q:
+				m_GizmoType = -1;
+				break;
+			case Key::W:
+				m_GizmoType = ImGuizmo::TRANSLATE;
+				break;
+			case Key::E:
+				m_GizmoType = ImGuizmo::ROTATE;
+				break;
+			case Key::R:
+				m_GizmoType = ImGuizmo::SCALE;
 				break;
 		}
 
