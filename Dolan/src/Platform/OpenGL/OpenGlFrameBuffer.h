@@ -17,13 +17,22 @@ namespace Dolan {
 		virtual void Bind() override;
 		virtual void Unbind() override;
 
-		virtual uint32_t GetColorAttachmentRendererId() const override { return m_ColorAttachment; };
+		virtual uint32_t GetColorAttachmentRendererId(uint32_t index = 0) const override
+		{
+			DN_CORE_ASSERT(index < m_ColorAttachments.size(), "");
+			return m_ColorAttachments[index];
+		}
 
 		virtual const FrameBufferSpec& GetSpec() const override { return m_Spec; }
 	private:
 		uint32_t m_RendererId = 0;
-		uint32_t m_ColorAttachment = 0, m_DepthAttachment = 0;
 		FrameBufferSpec m_Spec;
+
+		std::vector<FramebufferTextureSpec> m_ColorAttachmentSpecs;
+		FramebufferTextureSpec m_DepthAttachmentSpec = FramebufferTextureFormat::None;
+
+		std::vector<uint32_t> m_ColorAttachments;
+		uint32_t m_DepthAttachment;
 	};
 
 }

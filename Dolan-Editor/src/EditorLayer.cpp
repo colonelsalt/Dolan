@@ -26,6 +26,7 @@ namespace Dolan {
 		m_CheckerboardTexture = Texture2d::Create("assets/textures/Checkerboard.png");
 
 		FrameBufferSpec fbSpec;
+		fbSpec.Attachments = { FramebufferTextureFormat::RGBA8, FramebufferTextureFormat::Depth };
 		fbSpec.Width = 1280;
 		fbSpec.Height = 720;
 		m_Framebuffer = FrameBuffer::Create(fbSpec);
