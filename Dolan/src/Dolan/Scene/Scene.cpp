@@ -35,7 +35,23 @@ namespace Dolan {
 		m_Registry.destroy(entity);
 	}
 
-	void Scene::OnUpdate(Timestep ts)
+	void Scene::OnUpdateEditor(Timestep ts, EditorCamera& camera)
+	{
+		Renderer2d::BeginScene(camera);
+
+		// All entities that have a Transform and SpriteRenderer component
+		auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
+		for (entt::entity entity : group)
+		{
+			auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
+
+			Renderer2d::DrawQuad(transform.GetTransform(), sprite.Color);
+		}
+
+		Renderer2d::EndScene();
+	}
+
+	void Scene::OnUpdateRuntime(Timestep ts)
 	{
 		// Update scripts
 		{
@@ -70,6 +86,7 @@ namespace Dolan {
 			}
 		}
 
+		// Render
 		if (mainCamera)
 		{
 			Renderer2d::BeginScene(*mainCamera, cameraTransform);

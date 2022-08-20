@@ -4,6 +4,8 @@
 
 #include "Panels/SceneHierarchyPanel.h"
 
+#include "Dolan/Renderer/EditorCamera.h"
+
 namespace Dolan {
 
 	class EditorLayer : public Layer
@@ -37,6 +39,8 @@ namespace Dolan {
 		Entity m_SecondCameraEntity;
 
 		bool m_UsePrimaryCamera = true;
+
+		EditorCamera m_EditorCamera;
 
 		Ref<Texture2d> m_CheckerboardTexture;
 

@@ -5,6 +5,8 @@
 
 #include "Texture.h"
 
+#include "Dolan/Renderer/EditorCamera.h"
+
 namespace Dolan {
 
 	class Renderer2d
@@ -14,6 +16,7 @@ namespace Dolan {
 		static void Shutdown();
 
 		static void BeginScene(const OrthographicCamera& camera);
+		static void BeginScene(const EditorCamera& camera);
 		static void BeginScene(const Camera& camera, const glm::mat4 transform);
 		static void EndScene();
 
