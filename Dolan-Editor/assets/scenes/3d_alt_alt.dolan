@@ -40,9 +40,9 @@ Entities:
     TagComponent:
       Tag: Red square
     TransformComponent:
-      Translation: [0, -2.70000005, 0]
-      Rotation: [0, 0, 0]
-      Scale: [1, 1, 1]
+      Translation: [-1.55892098, -2.70001197, -17.1246777]
+      Rotation: [-1.63807329e-06, 1.10441375, -1.46190916e-06]
+      Scale: [2.82000065, 2.81999993, 2.82000065]
     SpriteRendererComponent:
       Color: [0.957529068, 0, 1, 1]
   - Entity: 739587394
