@@ -17,6 +17,7 @@ namespace Dolan {
 
 		void OnImGuiRender();
 
+		void SetSelectedEntity(Entity entity);
 		Entity GetSelectedEntity() const { return m_SelectedEntity; }
 	private:
 		void DrawEntityNode(Entity entity);

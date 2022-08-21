@@ -54,6 +54,11 @@ namespace Dolan {
 		ImGui::End();
 	}
 
+	void SceneHierarchyPanel::SetSelectedEntity(Entity entity)
+	{
+		m_SelectedEntity = entity;
+	}
+
 	void SceneHierarchyPanel::DrawEntityNode(Entity entity)
 	{
 		std::string& tag = entity.GetComponent<TagComponent>().Tag;
