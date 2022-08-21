@@ -67,11 +67,6 @@ namespace Dolan {
 				case ShaderDataType::Float2:
 				case ShaderDataType::Float3:
 				case ShaderDataType::Float4:
-				case ShaderDataType::Int:
-				case ShaderDataType::Int2:
-				case ShaderDataType::Int3:
-				case ShaderDataType::Int4:
-				case ShaderDataType::Bool:
 				{
 					glEnableVertexAttribArray(m_VertexBufferIndex);
 					glVertexAttribPointer(m_VertexBufferIndex,
@@ -80,6 +75,21 @@ namespace Dolan {
 						element.Normalized ? GL_TRUE : GL_FALSE,
 						layout.GetStride(),
 						(const void*)element.Offset);
+					m_VertexBufferIndex++;
+					break;
+				}
+				case ShaderDataType::Int:
+				case ShaderDataType::Int2:
+				case ShaderDataType::Int3:
+				case ShaderDataType::Int4:
+				case ShaderDataType::Bool:
+				{
+					glEnableVertexAttribArray(m_VertexBufferIndex);
+					glVertexAttribIPointer(m_VertexBufferIndex,
+										  element.GetComponentCount(),
+										  ShaderDataTypeToOpenGlBaseType(element.Type),
+										  layout.GetStride(),
+										  (const void*)element.Offset);
 					m_VertexBufferIndex++;
 					break;
 				}

@@ -135,8 +135,11 @@ namespace Dolan {
 
 		if (mouseX >= 0 && mouseY >= 0 && mouseX < (int)viewportSize.x && mouseY < (int)viewportSize.y)
 		{
-			int pixelData = m_Framebuffer->ReadPixel(1, mouseX, mouseY);
-			DN_CORE_WARN("Pixel data = {0}", pixelData);
+			int hoveredId = m_Framebuffer->ReadPixel(1, mouseX, mouseY);
+			if (hoveredId == -1)
+				m_HoveredEntity = {};
+			else
+				m_HoveredEntity = { (entt::entity)hoveredId, m_ActiveScene.get() };
 		}
 
 
@@ -223,6 +226,11 @@ namespace Dolan {
 		m_SceneHierarchyPanel.OnImGuiRender();
 
 		ImGui::Begin("Stats");
+
+		std::string name = "None";
+		if (m_HoveredEntity)
+			name = m_HoveredEntity.GetComponent<TagComponent>().Tag;
+		ImGui::Text("Hovered entity: %s", name.c_str());
 
 		auto stats = Renderer2d::GetStats();
 		ImGui::Text("Renderer2D Stats:");

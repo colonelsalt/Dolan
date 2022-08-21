@@ -16,6 +16,9 @@ namespace Dolan {
 		glm::vec2 TexCoord;
 		float TexIndex;
 		float TilingFactor;
+
+		// Editor only
+		int EntityId;
 	};
 
 	struct Renderer2dData
@@ -53,11 +56,12 @@ namespace Dolan {
 
 		s_Data.QuadVertexBuffer = VertexBuffer::Create(s_Data.MaxVertices * sizeof(QuadVertex));
 		s_Data.QuadVertexBuffer->SetLayout({
-			{ ShaderDataType::Float3, "a_Position" },
-			{ ShaderDataType::Float4, "a_Color" },
-			{ ShaderDataType::Float2, "a_TexCoord"},
-			{ ShaderDataType::Float, "a_TexIndex"},
-			{ ShaderDataType::Float, "a_TilingFactor"}
+			{ ShaderDataType::Float3, "a_Position"    },
+			{ ShaderDataType::Float4, "a_Color"       },
+			{ ShaderDataType::Float2, "a_TexCoord"    },
+			{ ShaderDataType::Float,  "a_TexIndex"    },
+			{ ShaderDataType::Float,  "a_TilingFactor"},
+			{ ShaderDataType::Int,    "a_EntityId"    }
 		});
 		s_Data.QuadVertexArray->AddVertexBuffer(s_Data.QuadVertexBuffer);
 
@@ -200,7 +204,7 @@ namespace Dolan {
 		DrawQuad(transform, texture, tilingFactor, tintColor);
 	}
 
-	void Renderer2d::DrawQuad(const glm::mat4& transform, const glm::vec4& color)
+	void Renderer2d::DrawQuad(const glm::mat4& transform, const glm::vec4& color, int entityId)
 	{
 		DN_PROFILE_FUNCTION();
 
@@ -220,6 +224,7 @@ namespace Dolan {
 			s_Data.QuadVertexBufferPtr->TexCoord = textureCoords[i];
 			s_Data.QuadVertexBufferPtr->TexIndex = whiteTextureIndex;
 			s_Data.QuadVertexBufferPtr->TilingFactor = tilingFactor;
+			s_Data.QuadVertexBufferPtr->EntityId = entityId;
 			s_Data.QuadVertexBufferPtr++;
 		}
 
@@ -229,7 +234,8 @@ namespace Dolan {
 		s_Data.Stats.QuadCount++;
 	}
 
-	void Renderer2d::DrawQuad(const glm::mat4& transform, const Ref<Texture2d>& texture, float tilingFactor, const glm::vec4 tintColor)
+	void Renderer2d::DrawQuad(const glm::mat4& transform, const Ref<Texture2d>& texture, float tilingFactor,
+							  const glm::vec4 tintColor, int entityId)
 	{
 		DN_PROFILE_FUNCTION();
 
@@ -267,6 +273,7 @@ namespace Dolan {
 			s_Data.QuadVertexBufferPtr->TexCoord = textureCoords[i];
 			s_Data.QuadVertexBufferPtr->TexIndex = textureIndex;
 			s_Data.QuadVertexBufferPtr->TilingFactor = tilingFactor;
+			s_Data.QuadVertexBufferPtr->EntityId = entityId;
 			s_Data.QuadVertexBufferPtr++;
 		}
 
@@ -306,6 +313,11 @@ namespace Dolan {
 			* glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
 
 		DrawQuad(transform, texture, tilingFactor, tintColor);
+	}
+
+	void Renderer2d::DrawSprite(const glm::mat4& transform, SpriteRendererComponent& src, int entityId)
+	{
+		DrawQuad(transform, src.Color, entityId);
 	}
 
 	void Renderer2d::ResetStats()

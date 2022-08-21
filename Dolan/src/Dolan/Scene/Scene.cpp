@@ -45,7 +45,7 @@ namespace Dolan {
 		{
 			auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
 
-			Renderer2d::DrawQuad(transform.GetTransform(), sprite.Color);
+			Renderer2d::DrawSprite(transform.GetTransform(), sprite, (int)entity);
 		}
 
 		Renderer2d::EndScene();
@@ -97,7 +97,7 @@ namespace Dolan {
 			{
 				auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
 
-				Renderer2d::DrawQuad(transform.GetTransform(), sprite.Color);
+				Renderer2d::DrawSprite(transform.GetTransform(), sprite, (int)entity);
 			}
 
 			Renderer2d::EndScene();

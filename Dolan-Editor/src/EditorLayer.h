@@ -37,6 +37,7 @@ namespace Dolan {
 		Entity m_SquareEntity;
 		Entity m_CameraEntity;
 		Entity m_SecondCameraEntity;
+		Entity m_HoveredEntity;
 
 		bool m_UsePrimaryCamera = true;
 
