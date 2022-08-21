@@ -47,6 +47,8 @@ namespace Dolan {
 		bool m_IsViewportFocused = false, m_IsViewportHovered = false;
 
 		glm::vec2 m_ViewportSize = { 1280.0f,720.0f };
+		glm::vec2 m_ViewportBounds[2];
+
 
 		glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
 
