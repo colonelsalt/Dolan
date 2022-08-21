@@ -243,7 +243,11 @@ namespace Dolan {
 
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0, 0 });
 		ImGui::Begin("Viewport");
-		ImVec2 viewportOffset = ImGui::GetCursorPos(); // Position of next thing to draw before viewport drawn
+		ImVec2 viewportMinRegion = ImGui::GetWindowContentRegionMin();
+		ImVec2 viewportMaxRegion = ImGui::GetWindowContentRegionMax();
+		ImVec2 viewportOffset = ImGui::GetWindowPos();
+		m_ViewportBounds[0] = { viewportMinRegion.x + viewportOffset.x, viewportMinRegion.y + viewportOffset.y };
+		m_ViewportBounds[1] = { viewportMaxRegion.x + viewportOffset.x, viewportMaxRegion.y + viewportOffset.y };
 
 		m_IsViewportFocused = ImGui::IsWindowFocused();
 		m_IsViewportHovered = ImGui::IsWindowHovered();
@@ -255,24 +259,16 @@ namespace Dolan {
 		uint32_t textureID = m_Framebuffer->GetColorAttachmentRendererId();
 		ImGui::Image((void*)textureID, viewportSize, ImVec2{ 0,1 }, ImVec2{ 1,0 });
 
-		ImVec2 windowSize = ImGui::GetWindowSize();
-		ImVec2 minBound = ImGui::GetWindowPos();
-		minBound.x += viewportOffset.x;
-		minBound.y += viewportOffset.y;
-
-		ImVec2 maxBound = { minBound.x + windowSize.x, minBound.y + windowSize.y };
-		m_ViewportBounds[0] = { minBound.x, minBound.y };
-		m_ViewportBounds[1] = { maxBound.x, maxBound.y };
-
 		// Gizmos
 		Entity selectedEntity = m_SceneHierarchyPanel.GetSelectedEntity();
 		if (selectedEntity && m_GizmoType != -1)
 		{
 			ImGuizmo::SetOrthographic(false);
 			ImGuizmo::SetDrawlist();
-			float windowWidth = (float)ImGui::GetWindowWidth();
-			float windowHeight = (float)ImGui::GetWindowHeight();
-			ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, windowWidth, windowHeight);
+			ImGuizmo::SetRect(m_ViewportBounds[0].x,
+							  m_ViewportBounds[0].y,
+							  m_ViewportBounds[1].x - m_ViewportBounds[0].x,
+							  m_ViewportBounds[1].y - m_ViewportBounds[0].y);
 
 			// Runtime camera from entity
 			// Entity cameraEntity = m_ActiveScene->GetPrimaryCameraEntity();
@@ -354,16 +350,20 @@ namespace Dolan {
 				break;
 			// Gizmos
 			case Key::Q:
-				m_GizmoType = -1;
+				if (!ImGuizmo::IsUsing())
+					m_GizmoType = -1;
 				break;
 			case Key::W:
-				m_GizmoType = ImGuizmo::TRANSLATE;
+				if (!ImGuizmo::IsUsing())
+					m_GizmoType = ImGuizmo::TRANSLATE;
 				break;
 			case Key::E:
-				m_GizmoType = ImGuizmo::ROTATE;
+				if (!ImGuizmo::IsUsing())
+					m_GizmoType = ImGuizmo::ROTATE;
 				break;
 			case Key::R:
-				m_GizmoType = ImGuizmo::SCALE;
+				if (!ImGuizmo::IsUsing())
+					m_GizmoType = ImGuizmo::SCALE;
 				break;
 		}
 
