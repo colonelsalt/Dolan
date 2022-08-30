@@ -1,2 +1,2 @@
 # Dolan Engine
-OpenGL/ImGui based game engine modelled on [Hazel](https://github.com/TheCherno/Hazel/).
+OpenGL/ImGui/entt based game engine modelled on [Hazel](https://github.com/TheCherno/Hazel/).
